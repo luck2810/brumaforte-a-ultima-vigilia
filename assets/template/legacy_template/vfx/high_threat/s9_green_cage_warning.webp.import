@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cloqpdd41basm"
-path.bptc="res://.godot/imported/s9_green_cage_warning.webp-d49c15c917f965f3280907fe5c8d978c.bptc.ctex"
+path.astc="res://.godot/imported/s9_green_cage_warning.webp-d49c15c917f965f3280907fe5c8d978c.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/template/legacy_template/vfx/high_threat/s9_green_cage_warning.webp"
-dest_files=["res://.godot/imported/s9_green_cage_warning.webp-d49c15c917f965f3280907fe5c8d978c.bptc.ctex"]
+dest_files=["res://.godot/imported/s9_green_cage_warning.webp-d49c15c917f965f3280907fe5c8d978c.astc.ctex"]
 
 [params]
 

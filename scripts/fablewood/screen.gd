@@ -140,7 +140,6 @@ func _load_preferences() -> void:
 		_filter_intensity=_valid_gain(cfg.get_value("settings","filter_intensity",0.3),0.3)
 		_tutorial_tour_requested=bool(cfg.get_value("settings","tutorial_requested",false))
 		_hard_mode=bool(cfg.get_value("settings","hard_mode",false))
-		I18n.set_locale(StringName(cfg.get_value("settings","locale","en-US")))
 	_set_volume("Music",_music_volume)
 	_set_volume("SFX",_sfx_volume)
 	Music.set_master_volume(_master_volume)
@@ -159,7 +158,6 @@ func _save_preferences() -> bool:
 	cfg.set_value("settings","filter_intensity",_filter_intensity)
 	cfg.set_value("settings","tutorial_requested",_tutorial_tour_requested)
 	cfg.set_value("settings","hard_mode",_hard_mode)
-	cfg.set_value("settings","locale",String(I18n.locale()))
 	var temporary:=_settings_file+".tmp"
 	if cfg.save(temporary)!=OK:return false
 	return DirAccess.rename_absolute(ProjectSettings.globalize_path(temporary),ProjectSettings.globalize_path(_settings_file))==OK
@@ -248,7 +246,7 @@ func _build() -> void:
 		canvas.add_child(shade)
 	match mode:
 		"loading":
-			_label(canvas,"SEED DEFENSE",48,Vector2(50,_logical.y-160),Vector2(600,70),P.GOLD)
+			_label(canvas,"BRUMAFORTE",48,Vector2(50,_logical.y-160),Vector2(600,70),P.GOLD)
 			_label(canvas,trf("subtitle"),20,Vector2(54,_logical.y-90),Vector2(610,45))
 		"title":_title()
 		"chapters":_chapters()
@@ -362,7 +360,7 @@ func _title() -> void:
 	var p:=_panel(canvas,Vector2(44,80) if not _portrait else Vector2(40,280),Vector2(445,630) if not _portrait else Vector2(640,720),P.PANEL_DEEP)
 	var scroll:=ScrollContainer.new();scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true;p.add_child(scroll)
 	var v:=_vbox(scroll);v.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-	_label(v,"SEED DEFENSE",49 if not _portrait else 58,Vector2.ZERO,Vector2.ZERO,P.GOLD)
+	_label(v,"BRUMAFORTE",49 if not _portrait else 58,Vector2.ZERO,Vector2.ZERO,P.GOLD)
 	_label(v,trf("subtitle"),15,Vector2.ZERO,Vector2.ZERO,P.GOLD)
 	_text(v,trf("tagline"),24)
 	_text(v,trf("intro"),19)
@@ -386,16 +384,12 @@ func _title() -> void:
 	licenses.name="OpenSourceLicensesButton"
 	licenses.action_mode=BaseButton.ACTION_MODE_BUTTON_PRESS
 	licenses.clip_text=false
-	var langs:=HBoxContainer.new();v.add_child(langs)
-	_label(langs,trf("language"),13,Vector2.ZERO,Vector2.ZERO,P.MUTED)
-	for loc:String in ["en-US","zh-CN"]:
-		var b:=_button(langs,"EN" if loc=="en-US" else "CN 简体中文",func():I18n.set_locale(StringName(loc)),Vector2(75 if loc=="en-US" else 155,42),String(I18n.locale())==loc)
-		b.tooltip_text="English" if loc=="en-US" else "简体中文"
+
 	_label(canvas,trf("genre_tagline"),13,Vector2(48,42),Vector2(500,30),P.GOLD)
 	_label(canvas,trf("elements_tagline"),13,Vector2(48,_logical.y-45),Vector2(600,30),P.MUTED)
 
 func _chapters() -> void:
-	_label(canvas,"SEED DEFENSE",30,Vector2(42,32),Vector2(600,50),P.GOLD)
+	_label(canvas,"BRUMAFORTE",30,Vector2(42,32),Vector2(600,50),P.GOLD)
 	_label(canvas,trf("chapters"),42,Vector2(42,87),Vector2(650,65))
 	if not _portrait:_grove_accent(P.CHAPTER_ACCENT,Vector2(42,176),Vector2(260,65))
 	var row:=Control.new();canvas.add_child(row)
@@ -426,7 +420,7 @@ func _battle() -> void:
 	_cards=[]
 	var top:=_panel(canvas,Vector2(18,15),Vector2(_logical.x-36,65),P.PANEL_DEEP)
 	var row:=HBoxContainer.new();top.add_child(row)
-	_label(row,"SEED DEFENSE",22,Vector2.ZERO,Vector2.ZERO,P.GOLD)
+	_label(row,"BRUMAFORTE",22,Vector2.ZERO,Vector2.ZERO,P.GOLD)
 	_hud=_label(row,"",21)
 	_hud.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_button(row,"Ⅱ",_show_pause,Vector2(55,43)).tooltip_text=trf("pause_hint")
@@ -819,7 +813,7 @@ func _results() -> void:
 	var scroll:=ScrollContainer.new();scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true;p.add_child(scroll)
 	var v:=_vbox(scroll);v.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_grove_accent(P.RESULT_ACCENT,p.position+Vector2(p.size.x-78,12),Vector2(58,58))
-	_label(v,"SEED DEFENSE",20,Vector2.ZERO,Vector2.ZERO,P.GOLD)
+	_label(v,"BRUMAFORTE",20,Vector2.ZERO,Vector2.ZERO,P.GOLD)
 	if r.has("hard_mode"):
 		_mode_badge(v,bool(r.get("hard_mode",false)),"ResultModeBadge",Vector2.ZERO,Vector2(132,30),13)
 	_text(v,trf("victory") if win else trf("defeat"),35)
@@ -958,9 +952,7 @@ func _show_settings() -> void:
 	_label(v,trf("filter_intensity"),19)
 	var intensity:=HSlider.new();intensity.name="ScreenFilterIntensity";intensity.min_value=0;intensity.max_value=1;intensity.step=0.05;intensity.value=_filter_intensity;intensity.scrollable=false;intensity.custom_minimum_size=Vector2(0,40);v.add_child(intensity)
 	intensity.value_changed.connect(func(value:float):_filter_intensity=value;_apply_filter();_save_preferences())
-	var row:=HBoxContainer.new();v.add_child(row)
-	_button(row,"EN",func():I18n.set_locale(&"en-US"),Vector2(180,48))
-	_button(row,"CN 简体中文",func():I18n.set_locale(&"zh-CN"),Vector2(240,48))
+
 	_button(v,trf("back"),_close_modal,Vector2(0,50))
 
 func _local_score_entries(hard:bool)->Array[Dictionary]:

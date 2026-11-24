@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="manus-game-loading-screen" content="1">
+  <meta name="theme-color" content="#101a17">
+  
+  
+
+<script>(function(){var R={"index.wasm":"/manus-storage/game/sha256/fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0.wasm","index.pck":"/manus-storage/game/sha256/a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546.pck"};var f=window.fetch.bind(window);window.fetch=function(i,o){var u=typeof i==="string"?i:(i&&i.url)||"";var b=u.split("?")[0].split("/").pop();return R[b]?f(R[b],o):f(i,o)};})();</script>
+<script>(()=>{const Native=window.AudioContext||window.webkitAudioContext;if(!Native)return;const contexts=new Set();const Wrapped=new Proxy(Native,{construct(target,args){const context=Reflect.construct(target,args);contexts.add(context);window.__protosAudioContexts=contexts;if(navigator.userActivation?.hasBeenActive&&context.state==='suspended')void context.resume();return context}});window.AudioContext=Wrapped;if(window.webkitAudioContext===Native)window.webkitAudioContext=Wrapped;const unlock=()=>{for(const context of contexts)if(context.state==='suspended')void context.resume()};for(const type of ['pointerdown','touchstart','keydown'])window.addEventListener(type,unlock,{capture:true,passive:true});document.addEventListener('visibilitychange',()=>{if(!document.hidden)unlock()});window.__protosAudioUnlock=unlock;window.__protosAudioStates=()=>[...contexts].map(context=>context.state)})();</script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #101a17;
+      --moss: #263b30;
+      --parchment: #f2e4c4;
+      --gold: #d1aa61;
+      --muted: #b7b49f;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--night); color: var(--parchment); }
+    body { font-family: Georgia, "Times New Roman", serif; }
+    #canvas { display: block; width: 100%; height: 100%; outline: none; }
+    #loading { position: fixed; inset: 0; display: grid; place-items: center; padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); overflow: auto; background: radial-gradient(ellipse at 50% 42%, #2a3b2d 0, #192722 42%, #101a17 78%); text-align: center; }
+    #loading[hidden], [hidden] { display: none !important; }
+    .gate { position: relative; display: grid; justify-items: center; gap: 15px; width: min(540px, 100%); padding: 36px 28px 32px; border: 1px solid rgba(209,170,97,.58); background: linear-gradient(145deg, rgba(21,33,27,.97), rgba(15,24,21,.96)); box-shadow: 0 18px 80px rgba(0,0,0,.42), inset 0 0 0 5px rgba(209,170,97,.055); }
+    .gate::before, .gate::after { content: ""; position: absolute; width: 23px; height: 23px; border-color: var(--gold); opacity: .82; }
+    .gate::before { top: 7px; left: 7px; border-top: 1px solid; border-left: 1px solid; }
+    .gate::after { right: 7px; bottom: 7px; border-right: 1px solid; border-bottom: 1px solid; }
+    .crest { display: grid; place-items: center; width: 68px; height: 76px; color: var(--gold); filter: drop-shadow(0 0 16px rgba(209,170,97,.16)); }
+    .crest svg { width: 100%; height: 100%; }
+    .eyebrow { margin: 0; color: var(--gold); font: 700 11px/1.4 system-ui, sans-serif; letter-spacing: .26em; text-transform: uppercase; }
+    h1 { max-width: 100%; margin: 0; color: var(--parchment); font-size: clamp(25px, 5vw, 38px); font-weight: 600; line-height: 1.12; letter-spacing: .025em; text-wrap: balance; }
+    .subtitle { margin: 0; color: var(--muted); font: 500 12px/1.5 system-ui, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+    .rule { width: min(310px, 90%); height: 1px; margin: 3px 0; background: linear-gradient(90deg, transparent, rgba(209,170,97,.8), transparent); }
+    #loading-status { min-height: 1.5em; color: var(--parchment); font: 500 14px/1.5 system-ui, sans-serif; }
+    progress { width: min(310px, 100%); height: 8px; overflow: hidden; border: 1px solid rgba(209,170,97,.55); border-radius: 0; background: #18241e; accent-color: var(--gold); }
+    progress::-webkit-progress-bar { background: #18241e; }
+    progress::-webkit-progress-value { background: linear-gradient(90deg, #9a7540, #e3c57e); }
+    progress::-moz-progress-bar { background: linear-gradient(90deg, #9a7540, #e3c57e); }
+    #loading-notice { max-width: 370px; color: var(--muted); font: 13px/1.55 system-ui, sans-serif; }
+    button { min-width: 150px; padding: 11px 20px; border: 1px solid var(--gold); border-radius: 2px; background: #263b30; color: var(--parchment); cursor: pointer; font: 700 13px/1.2 system-ui, sans-serif; letter-spacing: .08em; }
+    button:hover, button:focus-visible { background: #354c3b; outline: 2px solid var(--parchment); outline-offset: 3px; }
+    @media (max-width: 520px) { .gate { padding: 28px 20px 24px; gap: 12px; } .crest { width: 56px; height: 64px; } }
+    @media (max-height: 480px) { #loading { place-items: start center; } .gate { padding: 17px 18px; gap: 8px; margin: auto 0; } .crest { width: 40px; height: 45px; } h1 { font-size: 23px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+<!-- manus:game-sharing:start -->
+<title>Brumaforte: A Última Vigília</title>
+<link rel="icon" type="image/png" href="./share/a2370bb286feddc51c9403cb91ce13b31c327329584ef9434e58c8e53f8893d4.png">
+<link rel="apple-touch-icon" href="./share/a2370bb286feddc51c9403cb91ce13b31c327329584ef9434e58c8e53f8893d4.png">
+<meta name="description" content="Defenda Brumaforte em uma campanha de fantasia medieval: posicione guardiões elementais, aprimore suas defesas e combine poderes contra ondas de criaturas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Brumaforte: A Última Vigília">
+<meta property="og:description" content="Defenda Brumaforte em uma campanha de fantasia medieval: posicione guardiões elementais, aprimore suas defesas e combine poderes contra ondas de criaturas.">
+<meta property="og:url" content="https://brumaforte-ebzdsztg.manus.game/">
+<meta property="og:image" content="https://brumaforte-ebzdsztg.manus.game/share/b9134970dd05bee3f3e1939bdd7c52f978912c15b3679207d2da115b2935a545.png">
+<meta property="og:image:width" content="2560">
+<meta property="og:image:height" content="1440">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Brumaforte: A Última Vigília">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brumaforte: A Última Vigília">
+<meta name="twitter:description" content="Defenda Brumaforte em uma campanha de fantasia medieval: posicione guardiões elementais, aprimore suas defesas e combine poderes contra ondas de criaturas.">
+<meta name="twitter:image" content="https://brumaforte-ebzdsztg.manus.game/share/b9134970dd05bee3f3e1939bdd7c52f978912c15b3679207d2da115b2935a545.png">
+<meta name="twitter:image:alt" content="Brumaforte: A Última Vigília">
+<!-- manus:game-sharing:end -->
+</head>
+<body>
+  <canvas id="canvas" tabindex="0">Seu navegador não oferece suporte ao canvas necessário para executar o jogo.</canvas>
+  <section id="loading" role="status" aria-live="polite">
+    <div class="gate">
+      <div class="crest" aria-hidden="true">
+        <svg viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M36 3 64 14v23c0 18-11 31-28 40C19 68 8 55 8 37V14L36 3Z" stroke="currentColor" stroke-width="2.4"/>
+          <path d="M18 22h36v31H18zM24 15h8v13h-8zm16 0h8v13h-8zM33 39h7v14h-7z" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M12 32H4m64 0h-8M36 3v-2" stroke="currentColor" stroke-width="2.2"/>
+          <circle cx="36" cy="10" r="2.4" fill="currentColor"/>
+        </svg>
+      </div>
+      <p class="eyebrow">A Vigília de Brumaforte</p>
+      <h1 id="game-title">Brumaforte: A Última Vigília</h1>
+      <p class="subtitle">A fronteira não cairá esta noite</p>
+      <div class="rule" aria-hidden="true"></div>
+      <p id="loading-status">Preparando o campo de batalha…</p>
+      <progress id="loading-progress" aria-label="Progresso do carregamento"></progress>
+      <p id="loading-notice" hidden></p>
+      <button id="loading-retry" type="button" hidden>Tentar novamente</button>
+      <noscript>JavaScript é necessário para executar este jogo.</noscript>
+    </div>
+  </section>
+  <script>
+    (() => {
+      const config = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":194242620,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+      const threads = false;
+      const canvas = document.getElementById('canvas');
+      const loading = document.getElementById('loading');
+      const status = document.getElementById('loading-status');
+      const progress = document.getElementById('loading-progress');
+      const notice = document.getElementById('loading-notice');
+      const retry = document.getElementById('loading-retry');
+      retry.addEventListener('click', () => window.location.reload());
+      let failed = false;
+      let ready = false;
+      const startedAt = performance.now();
+      let lastProgressAt = startedAt;
+      let downloadedBytes = 0;
+      let downloadComplete = false;
+      const updateNotice = () => {
+        if (failed || ready || performance.now() - startedAt < 30000) return;
+        notice.hidden = false;
+        retry.hidden = false;
+        const message = performance.now() - lastProgressAt >= 30000
+          ? 'O carregamento está demorando. Você pode aguardar ou tentar novamente.'
+          : 'Ainda carregando. Você pode aguardar ou tentar novamente.';
+        if (notice.textContent !== message) notice.textContent = message;
+      };
+      const onWindowError = (event) => fail(event.error || new Error('Engine startup error'));
+      const onUnhandledRejection = (event) => fail(event.reason || new Error('Engine startup rejected'));
+      const startupWatch = setInterval(updateNotice, 1000);
+      const stopObserving = () => {
+        clearInterval(startupWatch);
+        window.removeEventListener('error', onWindowError);
+        window.removeEventListener('unhandledrejection', onUnhandledRejection);
+      };
+      const fail = (error) => {
+        if (failed || ready) return;
+        failed = true;
+        stopObserving();
+        console.error('[brumaforte-loading] Falha ao iniciar o jogo', error);
+        loading.hidden = false;
+        status.textContent = 'Não foi possível iniciar o jogo. Tente novamente.';
+        progress.hidden = true;
+        notice.hidden = true;
+        retry.hidden = false;
+      };
+      window.addEventListener('error', onWindowError);
+      window.addEventListener('unhandledrejection', onUnhandledRejection);
+      const onProgress = (current, total) => {
+        if (failed || ready) return;
+        if (Number.isFinite(current) && current > downloadedBytes) {
+          downloadedBytes = current;
+          lastProgressAt = performance.now();
+        }
+        if (!downloadComplete && Number.isFinite(total) && total > 0 && Number.isFinite(current) && current >= total) {
+          downloadComplete = true;
+          lastProgressAt = performance.now();
+        }
+        updateNotice();
+        if (!Number.isFinite(total) || total <= 0 || !Number.isFinite(current) || current < 0) {
+          progress.removeAttribute('value');
+          status.textContent = 'Preparando o campo de batalha…';
+          return;
+        }
+        progress.max = total;
+        progress.value = Math.min(current, total);
+        status.textContent = current >= total ? 'Quase lá…' : `Carregando arquivos… ${Math.floor(current / total * 100)}%`;
+      };
+      const start = async () => {
+        if (failed) return;
+        try {
+          lastProgressAt = performance.now();
+          const missing = Engine.getMissingFeatures({ threads });
+          if (missing.length) throw new Error(`Recursos do navegador ausentes: ${missing.join(', ')}`);
+          const engine = new Engine({ ...config, canvas });
+          await engine.startGame({ onProgress });
+          if (failed) return;
+          ready = true;
+          stopObserving();
+          notice.hidden = true;
+          retry.hidden = true;
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            if (failed) return;
+            loading.hidden = true;
+            if (config['focusCanvas']) canvas.focus();
+          }));
+        } catch (error) {
+          fail(error);
+        }
+      };
+      const script = document.createElement('script');
+      script.src = 'index.js';
+      script.addEventListener('load', start, { once: true });
+      script.addEventListener('error', () => fail(new Error('Não foi possível carregar o script do jogo')), { once: true });
+      document.head.appendChild(script);
+    })();
+  </script>
+</body>
+</html>
+

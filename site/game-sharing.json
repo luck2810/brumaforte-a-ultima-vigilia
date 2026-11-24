@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "publicationOrigin": "https://brumaforte-ebzdsztg.manus.game",
+  "title": "Brumaforte: A Última Vigília",
+  "description": "Defenda Brumaforte em uma campanha de fantasia medieval: posicione guardiões elementais, aprimore suas defesas e combine poderes contra ondas de criaturas.",
+  "defaultCaptions": {
+    "x": "Brumaforte: A Última Vigília — defenda a fronteira, aprimore guardiões elementais e resista às ondas.",
+    "facebook": "A fronteira não cairá esta noite. Entre na campanha de Brumaforte: A Última Vigília.",
+    "reddit": "Brumaforte: A Última Vigília — tower defense medieval de campanha com guardiões elementais.",
+    "discord": "Jogue Brumaforte: A Última Vigília: defenda a fortaleza, aprimore guardiões e combine poderes."
+  },
+  "assets": {
+    "og": {
+      "digest": "sha256:b9134970dd05bee3f3e1939bdd7c52f978912c15b3679207d2da115b2935a545",
+      "path": "share/b9134970dd05bee3f3e1939bdd7c52f978912c15b3679207d2da115b2935a545.png",
+      "mime": "image/png",
+      "width": 2560,
+      "height": 1440,
+      "sizeBytes": 6169994,
+      "sourcePath": "assets/share/brumaforte/og.png"
+    },
+    "favicon": {
+      "digest": "sha256:a2370bb286feddc51c9403cb91ce13b31c327329584ef9434e58c8e53f8893d4",
+      "path": "share/a2370bb286feddc51c9403cb91ce13b31c327329584ef9434e58c8e53f8893d4.png",
+      "mime": "image/png",
+      "width": 1920,
+      "height": 1920,
+      "sizeBytes": 4416968,
+      "sourcePath": "assets/share/brumaforte/favicon.png"
+    }
+  }
+}

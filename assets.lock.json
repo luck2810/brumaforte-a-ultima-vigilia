@@ -1,6 +1,14 @@
 {
   "version": 2,
   "groups": {
+    "brumaforte": {
+      "name": "Brumaforte",
+      "order": 20
+    },
+    "share": {
+      "name": "Share",
+      "order": 30
+    },
     "template": {
       "name": "Template",
       "order": 0
@@ -8,6 +16,62 @@
   },
   "bundles": {},
   "assets": {
+    "assets/brumaforte/towers/arqueiros.png": {
+      "path": "/manus-storage/game/sha256/031797bdb49aa240765504403a8faa5ea253df950151847e2c3934dd08936389.png",
+      "sha256": "sha256:031797bdb49aa240765504403a8faa5ea253df950151847e2c3934dd08936389",
+      "size": 3982601,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": false
+    },
+    "assets/brumaforte/towers/canhao.png": {
+      "path": "/manus-storage/game/sha256/c7463f5eb651c51da960497a7475341a5bf4d6fd85d2fdf5a06aed10fb54a3ca.png",
+      "sha256": "sha256:c7463f5eb651c51da960497a7475341a5bf4d6fd85d2fdf5a06aed10fb54a3ca",
+      "size": 3330954,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": false
+    },
+    "assets/brumaforte/towers/catapulta.png": {
+      "path": "/manus-storage/game/sha256/ccf1db82bb493ec4e8dcc91e6dbe7be6160a99ab728033686bddde4814de3a8f.png",
+      "sha256": "sha256:ccf1db82bb493ec4e8dcc91e6dbe7be6160a99ab728033686bddde4814de3a8f",
+      "size": 4945842,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": false
+    },
+    "assets/brumaforte/towers/gelo.png": {
+      "path": "/manus-storage/game/sha256/29bb29c739407903267a79dcd080b6f3b09030b5970f9f7116c01e47b954add1.png",
+      "sha256": "sha256:29bb29c739407903267a79dcd080b6f3b09030b5970f9f7116c01e47b954add1",
+      "size": 3438463,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": false
+    },
+    "assets/brumaforte/towers/magia.png": {
+      "path": "/manus-storage/game/sha256/95127d738d6f2e7ca6faad2473d0d752c150fdbae372bc068081dc02e4a3eb74.png",
+      "sha256": "sha256:95127d738d6f2e7ca6faad2473d0d752c150fdbae372bc068081dc02e4a3eb74",
+      "size": 3133074,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": false
+    },
+    "assets/share/brumaforte/favicon.png": {
+      "path": "/manus-storage/game/sha256/a2370bb286feddc51c9403cb91ce13b31c327329584ef9434e58c8e53f8893d4.png",
+      "sha256": "sha256:a2370bb286feddc51c9403cb91ce13b31c327329584ef9434e58c8e53f8893d4",
+      "size": 4416968,
+      "assetType": "image",
+      "groupId": "share",
+      "used": true
+    },
+    "assets/share/brumaforte/og.png": {
+      "path": "/manus-storage/game/sha256/b9134970dd05bee3f3e1939bdd7c52f978912c15b3679207d2da115b2935a545.png",
+      "sha256": "sha256:b9134970dd05bee3f3e1939bdd7c52f978912c15b3679207d2da115b2935a545",
+      "size": 6169994,
+      "assetType": "image",
+      "groupId": "share",
+      "used": true
+    },
     "assets/template/Audio/illuminated_back.ogg": {
       "path": "https://d1oupeiobkpcny.cloudfront.net/assets/dashboard/materials/2026/09/24/2fc5765b0d6e56e12e7c7836664007253cb3d8a041fc1a62ac96bd5021048213.bin",
       "sha256": "sha256:2fc5765b0d6e56e12e7c7836664007253cb3d8a041fc1a62ac96bd5021048213",
@@ -4814,7 +4878,7 @@
       "size": 137343,
       "assetType": "image",
       "groupId": "template",
-      "used": true
+      "used": false
     },
     "assets/template/share/grove-20260924/loading-background.webp": {
       "path": "https://d1oupeiobkpcny.cloudfront.net/assets/dashboard/materials/2026/09/24/f59dea931f0c6158fb807322da3c0a6e368cca0688669290472797a8a85b2dce.bin",
@@ -4830,7 +4894,7 @@
       "size": 1433603,
       "assetType": "image",
       "groupId": "template",
-      "used": true
+      "used": false
     },
     "assets/template/share/source/illuminated_gameplay.png": {
       "path": "https://d1oupeiobkpcny.cloudfront.net/assets/dashboard/materials/2026/09/24/f708aa295052723f59755feec84d2ec9a65154fc8dacbc42142df09dc0b635c5.bin",

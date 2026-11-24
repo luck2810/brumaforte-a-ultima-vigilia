@@ -4,8 +4,8 @@ extends Node
 
 signal locale_changed(locale_id: StringName)
 
-const DEFAULT_LOCALE := &"en-US"
-const SUPPORTED_LOCALES: Array[StringName] = [&"en-US", &"zh-CN"]
+const DEFAULT_LOCALE := &"pt-BR"
+const SUPPORTED_LOCALES: Array[StringName] = [&"pt-BR", &"en-US", &"zh-CN"]
 const CATALOG_DIR := "res://localization"
 const ROOT_KEYS := ["locale", "entries"]
 const UiCopyType := preload("res://scripts/ui/components/ui_copy.gd")
@@ -25,7 +25,7 @@ func t(key: StringName, fallback: String) -> String:
 	var value: Variant = _entries.get(String(key), fallback)
 	if value is String and not String(value).is_empty():
 		return String(value)
-	var english := _catalogs.get(DEFAULT_LOCALE, {}) as Dictionary
+	var english := _catalogs.get(&"en-US", {}) as Dictionary
 	value = english.get(String(key), fallback)
 	if value is String and not String(value).is_empty():
 		return String(value)

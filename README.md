@@ -1,4 +1,6 @@
-# Game Template — Elemental Tower Defense
+# Brumaforte: A Última Vigília
+
+Este projeto ainda é uma adaptação parcial do starter, não a implementação completa do escopo de cinco torres/modos. Leia [o estado da entrega e as lacunas conhecidas](docs/STATUS_BRUMAFORTE.md) e [TODO.md](TODO.md) antes de assumir recursos como concluídos.
 
 This versioned source is owned by the Webdev Addon. Use the installed Game workflow for initialization, preview, release and publishing. Matching gameplay source: template-provenance.json. Existing projects are never overwritten by a new starter.
 
@@ -281,7 +283,7 @@ apply modes. Localize that text in the project's adapter, preserving the actual 
 ### Export constraints
 Include runtime JSON/CSV/TXT through include_filter or Godot resources. Keep Web thread_support=false, resource paths discoverable, and the template-specific size budget. Use the Session port and the Addon preview/export workflow; do not hardcode the old Sandbox port or overwrite generated site/dist. Change identity through project.godot and the editable game loading shell, not generated HTML.
 
-**Seed Defense** uses `junnyboi/game-td-elemental` art.
+The inherited starter art is credited to `junnyboi/game-td-elemental`; preserve its provenance, notices and unused source files.
 Follow the installed Game workflow; do not restore predecessor roster, traps or campaign.
 
 ## Playable loop

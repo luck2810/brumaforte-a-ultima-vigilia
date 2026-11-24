@@ -1,15 +1,15 @@
 {
   "schemaVersion": 2,
-  "title": "Seed Defense",
-  "description": "Defend the last seed with elemental guardians, combine their powers, and face escalating waves of forest invaders.",
+  "title": "Brumaforte: A Última Vigília",
+  "description": "Defenda Brumaforte em uma campanha de fantasia medieval: posicione guardiões elementais, aprimore suas defesas e combine poderes contra ondas de criaturas.",
   "defaultCaptions": {
-    "x": "Defend the last seed in Seed Defense.",
-    "facebook": "Build an elemental defense and protect the last seed in Seed Defense.",
-    "reddit": "Seed Defense — elemental tower defense with guardian merges.",
-    "discord": "Play Seed Defense — build, upgrade, and merge elemental guardians."
+    "x": "Brumaforte: A Última Vigília — defenda a fronteira, aprimore guardiões elementais e resista às ondas.",
+    "facebook": "A fronteira não cairá esta noite. Entre na campanha de Brumaforte: A Última Vigília.",
+    "reddit": "Brumaforte: A Última Vigília — tower defense medieval de campanha com guardiões elementais.",
+    "discord": "Jogue Brumaforte: A Última Vigília: defenda a fortaleza, aprimore guardiões e combine poderes."
   },
   "assets": {
-    "og": "assets/template/share/grove-20260924/og.png",
-    "favicon": "assets/template/share/grove-20260924/favicon.png"
+    "og": "assets/share/brumaforte/og.png",
+    "favicon": "assets/share/brumaforte/favicon.png"
   }
 }
