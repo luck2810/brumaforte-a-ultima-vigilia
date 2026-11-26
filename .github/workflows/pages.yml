@@ -1,6 +1,11 @@
 name: Deploy Brumaforte to GitHub Pages
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/pages.yml'
+      - 'site/**'
   workflow_dispatch:
 
 permissions:
