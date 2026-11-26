@@ -1,0 +1,78 @@
+name: Deploy Brumaforte to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/pages.yml'
+      - 'site/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Select GitHub Actions as the Pages source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method PUT \
+            "repos/${GITHUB_REPOSITORY}/pages" \
+            -f build_type=workflow
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type')" = "workflow"
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Download the checked Godot runtime
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download checkpoint-1e15fb0 \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'index.wasm' \
+            --pattern 'index.pck' \
+            --dir site
+          printf '%s  %s\n' 'fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0' 'site/index.wasm' | sha256sum --check
+          printf '%s  %s\n' 'a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546' 'site/index.pck' | sha256sum --check
+      - name: Prepare a same-origin Pages copy
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html_path = Path('site/index.html')
+          html = html_path.read_text(encoding='utf-8')
+          replacements = {
+              '/manus-storage/game/sha256/fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0.wasm': 'index.wasm',
+              '/manus-storage/game/sha256/a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546.pck': 'index.pck',
+          }
+          for old, new in replacements.items():
+              if html.count(old) != 1:
+                  raise SystemExit(f'expected exactly one {old.rsplit("/", 1)[-1]} reference')
+              html = html.replace(old, new)
+          html_path.write_text(html, encoding='utf-8')
+          Path('site/.nojekyll').touch()
+          PY
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
