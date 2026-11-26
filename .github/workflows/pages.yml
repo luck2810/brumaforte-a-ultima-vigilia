@@ -1,11 +1,6 @@
 name: Deploy Brumaforte to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/pages.yml'
-      - 'site/**'
   workflow_dispatch:
 
 permissions:
@@ -23,14 +18,6 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
-      - name: Select GitHub Actions as the Pages source
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api --method PUT \
-            "repos/${GITHUB_REPOSITORY}/pages" \
-            -f build_type=workflow
-          test "$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type')" = "workflow"
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Download the checked Godot runtime
