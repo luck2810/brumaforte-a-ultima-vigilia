@@ -368,10 +368,13 @@ func enemy_sprite_transform(at:Vector2,flip:bool)->Transform2D:
 	return Transform2D(Vector2(-_scale if flip else _scale,0),Vector2(0,_scale),_origin+at*_scale)
 
 func _draw_enemy(e:EnemyState, pos:Vector2) -> void:
+	if e.def_id in [&"skeleton",&"wisp"]:
+		_draw_added_enemy(e,pos)
+		return
 	if LateVisuals.is_late(e.def_id):
 		_draw_late_enemy(e,pos)
 		return
-	var h:float={&"goblin":34.0,&"orc":44.0,&"troll":62.0,&"dragon":78.0}.get(e.def_id,40.0)
+	var h:float={&"goblin":34.0,&"orc":44.0,&"troll":62.0,&"dragon":78.0,&"skeleton":48.0,&"wisp":50.0}.get(e.def_id,40.0)
 	h *= float(TweakControls.value(&"enemies.visual_scale",1.0))
 	var floating:=21.0 if e.aerial else 0.0
 	_ellipse(pos,Vector2(h*0.22,3),Color(0,0,0,0.32),2.3)
@@ -392,6 +395,21 @@ func _draw_enemy(e:EnemyState, pos:Vector2) -> void:
 	bar.size.x*=clampf(float(e.hp)/e.hp_max,0,1)
 	draw_rect(bar,Color("c88ade") if e.aerial else Color("9bc987"))
 
+func _draw_added_enemy(e:EnemyState,pos:Vector2)->void:
+	var h:=48.0 if e.def_id==&"skeleton" else 50.0
+	h*=float(TweakControls.value(&"enemies.visual_scale",1.0))
+	var phase:=float(rendered_enemy_phase(e))
+	var bob:=sin(phase*TAU/EnemyAnim.DURATION)*2.5 if e.def_id==&"wisp" and not reduced_motion else 0.0
+	var contact:=pos-Vector2(0,(25.0 if e.aerial else 0.0)+bob)
+	_ellipse(pos,Vector2(h*.2,3),Color(0,0,0,.22 if e.aerial else .32),2.0)
+	var tint:=Color("a1e4ff") if model.tick<int(model.slow_until.get(e.id,0)) else Color("ffcfb5") if model.tick-e.last_damage_tick<4 else Color.WHITE
+	var dims:=Vector2.ONE*h
+	draw_set_transform_matrix(enemy_sprite_transform(contact,false))
+	draw_texture_rect(EnemyAnim.texture_for(e.def_id),Rect2(-Vector2(.5,.82)*dims,dims),false,tint)
+	draw_set_transform(_origin,0,Vector2.ONE*_scale)
+	var bar:=Rect2(pos+Vector2(-h*.32,-h-(25.0 if e.aerial else 0.0)-5),Vector2(h*.64,3.5))
+	draw_rect(bar,Color("151421"));bar.size.x*=clampf(float(e.hp)/maxi(1,e.hp_max),0,1)
+	draw_rect(bar,Color("8edeee") if e.aerial else Color("9bc987"))
 func _draw_late_enemy(e:EnemyState,pos:Vector2)->void:
 	var scale:=float(TweakControls.value(&"enemies.visual_scale",1.0))
 	var dimensions:=LateVisuals.dimensions(e.def_id)*scale
@@ -477,7 +495,7 @@ func enemy_art_bounds(e:EnemyState,at:Vector2=Vector2.INF)->Rect2:
 		var dimensions:=LateVisuals.dimensions(e.def_id)*float(TweakControls.value(&"enemies.visual_scale",1.0))
 		var floating:=21.0 if e.aerial else 0.0
 		return Rect2(ground_at-Vector2(0,floating)-LateVisuals.anchor(e.def_id)*dimensions,dimensions)
-	var h:float={&"goblin":34.0,&"orc":44.0,&"troll":62.0,&"dragon":78.0}.get(e.def_id,40.0)
+	var h:float={&"goblin":34.0,&"orc":44.0,&"troll":62.0,&"dragon":78.0,&"skeleton":48.0,&"wisp":50.0}.get(e.def_id,40.0)
 	h*=float(TweakControls.value(&"enemies.visual_scale",1.0))
 	var dimensions:=Vector2.ONE*h*EnemyAnim.DISPLAY_EXPANSION
 	return Rect2(ground_at-Vector2(0,21.0 if e.aerial else 0.0)-EnemyAnim.ANCHOR/EnemyAnim.CELL*dimensions,dimensions)
@@ -496,7 +514,7 @@ func enemy_hit_point(e:EnemyState)->Vector2:
 	if LateVisuals.is_late(e.def_id):
 		var bounds:=enemy_art_bounds(e)
 		return bounds.position+Vector2(bounds.size.x*.5,bounds.size.y*.42)
-	var h:float={&"goblin":34.0,&"orc":44.0,&"troll":62.0,&"dragon":78.0}.get(e.def_id,40.0)
+	var h:float={&"goblin":34.0,&"orc":44.0,&"troll":62.0,&"dragon":78.0,&"skeleton":48.0,&"wisp":50.0}.get(e.def_id,40.0)
 	h*=float(TweakControls.value(&"enemies.visual_scale",1.0))
 	return enemy_ground_position(e)-Vector2(0,h*0.48+(21.0 if e.aerial else 0.0))
 func tower_draw_rect(u:UnitState,animated:bool)->Rect2:

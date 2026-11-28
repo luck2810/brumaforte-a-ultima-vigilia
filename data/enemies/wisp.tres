@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/enemy_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"wisp"
+hp = 135
+atk = 0
+defense = 0
+resistance_permille = 150
+speed_tiles_per_s = 0.82
+aerial = true
+block_weight = 1
+leak_damage = 2
+sprite_id = &"wisp"

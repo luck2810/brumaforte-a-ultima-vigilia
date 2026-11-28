@@ -6,6 +6,7 @@ const P := preload("res://scripts/fablewood/presentation.gd")
 const GuardianAnimation := preload("res://scripts/fablewood/guardian_animation.gd")
 const GuardianIcon := preload("res://scripts/fablewood/guardian_icon.gd")
 const LateVisuals := preload("res://scripts/fablewood/late_enemy_visuals.gd")
+const EnemyAnim := preload("res://scripts/fablewood/enemy_animation.gd")
 const WorldType := preload("res://scripts/fablewood/world.gd")
 const ModelType := preload("res://sim/fablewood_battle.gd")
 const TutorialCallout:=preload("res://scripts/fablewood/tutorial_callout.gd")
@@ -44,6 +45,7 @@ var _hud: Label
 var _status: Label
 var _threat_status: Label
 var _next: Button
+var _fortify_button: Button
 var _threats_button: Button
 var _cards: Array[Button] = []
 var _notice: Label
@@ -222,6 +224,7 @@ func _apply_tuning() -> void:
 	model.dp=roundi(float(TweakControls.value(&"gameplay.start_gold",300.0)))
 	model.gold_scale=float(TweakControls.value(&"gameplay.reward_scale",1.0))
 	model.base_hp=roundi(float(TweakControls.value(&"gameplay.town_health",20.0)))
+	model.base_hp_max=model.base_hp
 	model.tower_range=roundi(float(TweakControls.value(&"player.range_bonus",0.0)))
 
 func _build() -> void:
@@ -463,7 +466,7 @@ func _battle() -> void:
 	for i:int in P.IDS.size():
 		var id:StringName=P.IDS[i]
 		var element:String=FablewoodBattle.ELEMENTS[id]
-		var b:=_button(buildrow,"%s\n%d"%[trf(element),model._op_defs[id].dp_cost],func():_choose(id),Vector2(171,78) if not _portrait else Vector2(82,119))
+		var b:=_button(buildrow,"%s\n%d"%[trf(element),model._op_defs[id].dp_cost],func():_choose(id),Vector2(165,78) if not _portrait else Vector2(74,119))
 		if not _portrait:
 			b.icon=GuardianAnimation.frame(element,1,0.0)
 		else:
@@ -475,9 +478,12 @@ func _battle() -> void:
 		b.add_theme_font_size_override("font_size",_scaled_font(17 if not _portrait else 16))
 		b.tooltip_text=trf(element+"_role")
 		_cards.append(b)
-	merge_flow.button=_button(buildrow,trf("merge_button"),merge_flow.start,Vector2(148,78) if not _portrait else Vector2(102,119))
+	merge_flow.button=_button(buildrow,trf("merge_button"),merge_flow.start,Vector2(148,78) if not _portrait else Vector2(72,119))
 	merge_flow.button.add_theme_font_size_override("font_size",_scaled_font(16))
-	_next=_button(buildrow,trf("next"),_next_wave,Vector2(300,78) if not _portrait else Vector2(148,119),true,NextWaveButton)
+	_fortify_button=_button(buildrow,trf("fortify_base"),_fortify_base,Vector2(178,78) if not _portrait else Vector2(118,119))
+	_fortify_button.add_theme_font_size_override("font_size",_scaled_font(16 if not _portrait else 13))
+	_fortify_button.tooltip_text=trf("fortify_base_hint")
+	_next=_button(buildrow,trf("next"),_next_wave,Vector2(240,78) if not _portrait else Vector2(118,119),true,NextWaveButton)
 	_next.motion_owner=self
 	_next.tooltip_text=trf("next_wave_hint")
 	if _portrait:
@@ -630,8 +636,9 @@ func _refresh_hud() -> void:
 	if _hud==null:return
 	_refresh_upgrade_availability()
 	_refresh_ultimate_status()
+	if is_instance_valid(_fortify_button):_fortify_button.disabled=not model.can_fortify_base() or _ended or _tutorial_active or paused or overlay!=null
 	if merge_flow!=null:merge_flow.refresh_button()
-	_hud.text=trf("hud_stats",{"health":maxi(0,model.base_hp),"gold":model.dp,"wave":model.wave})
+	_hud.text=trf("hud_stats",{"health":maxi(0,model.base_hp),"health_max":model.base_hp_max,"gold":model.dp,"wave":model.wave})
 	_hud.add_theme_font_size_override("font_size",_scaled_font(16 if _portrait else 21))
 	_status.text="%s 0%d  ·  %s"%[trf("chapter"),model.chapter,trf("incoming") if model.wave_active else trf("prepare") if model.wave==0 else trf("waiting")]
 	var threats:=_next_wave_late_threats()
@@ -683,6 +690,11 @@ func _handle_speed_key(event:InputEventKey) -> bool:
 	get_viewport().set_input_as_handled()
 	return true
 
+func _fortify_base() -> void:
+	if not _gameplay_action_allowed() or merge_flow.active:return
+	if model.apply_action([&"fortify_base"]):
+		Sfx.play("upgrade");_toast(trf("fortified"));_refresh_hud()
+	else:Sfx.play("invalid")
 func _next_wave() -> void:
 	if not _gameplay_action_allowed([5]) or (merge_flow!=null and merge_flow.active):return
 	if model.apply_action([&"next_wave"]):
@@ -998,6 +1010,8 @@ func _show_threats()->void:
 		var hard_feedback:=_text(v,trf("hard_mode_weakness"),15)
 		hard_feedback.name="HardModeWeaknessFeedback"
 		hard_feedback.add_theme_color_override("font_color",P.GOLD)
+	_guide_enemy(v,"skeleton")
+	_guide_enemy(v,"wisp")
 	_guide_enemy(v,"prismback")
 	_guide_enemy(v,"harrier")
 	_guide_enemy(v,"broodmother")
@@ -1023,6 +1037,7 @@ func _guide_enemy(parent:Node,kind:String)->void:
 	_label(column,trf("enemy_"+kind),21,Vector2.ZERO,Vector2.ZERO,P.GOLD)
 	var portrait:=TextureRect.new()
 	portrait.texture=LateVisuals.frame(StringName(kind),&"SE",0.0)
+	if kind in ["skeleton","wisp"]:portrait.texture=EnemyAnim.texture_for(StringName(kind))
 	portrait.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
 	portrait.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	portrait.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS

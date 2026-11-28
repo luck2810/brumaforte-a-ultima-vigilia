@@ -10,6 +10,7 @@ static func of(m: BattleModel) -> Dictionary:
 	var snapshot := {
 		"tick": m.tick,
 		"base_hp": m.base_hp,
+		"base_hp_max": _base_hp_max(m),
 		"result": m.result,
 		"stars": m.stars,
 		"spawned": m.spawned,
@@ -82,3 +83,9 @@ static func _mitigation(m: BattleModel) -> Dictionary:
 		"enemies": enemies,
 		"traps": traps,
 	}
+
+static func _base_hp_max(m: BattleModel) -> int:
+	for property: Dictionary in m.get_property_list():
+		if StringName(property.get("name", "")) == &"base_hp_max":
+			return int(m.get("base_hp_max"))
+	return m.config.base_hp_start if m.config != null else 20

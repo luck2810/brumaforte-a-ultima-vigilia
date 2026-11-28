@@ -52,6 +52,23 @@ func run() -> void:
 	check(not m.apply_action([&"upgrade",u.id]) and m.dp==gold,"Maximum tier rejects without spending")
 	check(m.apply_action([&"next_wave"]),"Next wave accepts")
 	check(not m.apply_action([&"next_wave"]),"Concurrent wave rejects")
+	var fortify:=make(1)
+	var hp_before:=fortify.base_hp
+	var gold_before:=fortify.dp
+	check(fortify.apply_action([&"fortify_base"]),"Fortification buys for 100 gold")
+	check(fortify.dp==gold_before-100 and fortify.dp_spent==100,"Fortification debits and accounts for cost")
+	check(fortify.base_hp==hp_before+10 and fortify.base_hp_max==30,"Fortification raises current and maximum health by ten")
+	check(fortify.snapshot().base_hp_max==30,"Snapshot carries fortified maximum health")
+	fortify.dp=0
+	var fortify_hash:=fortify.state_hash()
+	check(not fortify.apply_action([&"fortify_base"]) and fortify.state_hash()==fortify_hash,"Insufficient gold rejects without mutation")
+	fortify.dp=1000
+	for _i:int in 7:check(fortify.apply_action([&"fortify_base"]),"Further fortification remains available")
+	check(fortify.base_hp_max==100 and not fortify.apply_action([&"fortify_base"]),"Fortification respects upper health cap")
+	var guestile:=make(1)
+	check(not guestile.apply_action([&"fortify_base",1]),"Unexpected action parameters reject")
+	var added:=make(1)
+	check(added._defs.has(&"skeleton") and added._defs.has(&"wisp"),"Added enemy definitions load")
 	var lose:=make(1)
 	for w:int in 8:
 		if lose.result!=BattleModel.Result.RUNNING:break
