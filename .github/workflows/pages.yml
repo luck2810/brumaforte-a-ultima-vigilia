@@ -29,13 +29,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download checkpoint-1e15fb0 \
+          gh release download checkpoint-b74a9fb \
             --repo "$GITHUB_REPOSITORY" \
             --pattern 'index.wasm' \
             --pattern 'index.pck' \
             --dir site
           printf '%s  %s\n' 'fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0' 'site/index.wasm' | sha256sum --check
-          printf '%s  %s\n' 'a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546' 'site/index.pck' | sha256sum --check
+          printf '%s  %s\n' '3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee' 'site/index.pck' | sha256sum --check
       - name: Prepare a same-origin Pages copy
         run: |
           python3 - <<'PY'
@@ -44,7 +44,7 @@ jobs:
           html = html_path.read_text(encoding='utf-8')
           replacements = {
               '/manus-storage/game/sha256/fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0.wasm': 'index.wasm',
-              '/manus-storage/game/sha256/a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546.pck': 'index.pck',
+              '/manus-storage/game/sha256/3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee.pck': 'index.pck',
           }
           for old, new in replacements.items():
               if html.count(old) != 1:
