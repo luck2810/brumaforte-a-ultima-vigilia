@@ -1,0 +1,70 @@
+name: Deploy Brumaforte to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/pages.yml'
+      - 'site/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Download the checked Godot runtime
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download checkpoint-13261d2 \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'index.wasm' \
+            --pattern 'index.pck' \
+            --dir site
+          printf '%s  %s\n' 'fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0' 'site/index.wasm' | sha256sum --check
+          printf '%s  %s\n' '49505350df597cd4ef126710c2602aa96032efbd08843121e112ab7e2d1c0264' 'site/index.pck' | sha256sum --check
+      - name: Prepare a same-origin Pages copy
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html_path = Path('site/index.html')
+          html = html_path.read_text(encoding='utf-8')
+          replacements = {
+              '/manus-storage/game/sha256/fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0.wasm': 'index.wasm',
+              '/manus-storage/game/sha256/49505350df597cd4ef126710c2602aa96032efbd08843121e112ab7e2d1c0264.pck': 'index.pck',
+          }
+          for old, new in replacements.items():
+              if html.count(old) != 1:
+                  raise SystemExit(f'expected exactly one {old.rsplit("/", 1)[-1]} reference')
+              html = html.replace(old, new)
+          html_path.write_text(html, encoding='utf-8')
+          Path('site/.nojekyll').touch()
+          PY
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
