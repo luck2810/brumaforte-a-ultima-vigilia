@@ -363,7 +363,7 @@ func eligible_merge_donor(u:UnitState)->bool:
 func can_merge(a:UnitState,b:UnitState)->bool:
 	if result!=Result.RUNNING or not pending_merge.is_empty() or not eligible_merge_donor(a) or not eligible_merge_donor(b) or a.id==b.id:return false
 	var first:=elements_for(a);var second:=elements_for(b)
-	if first.size()!=second.size():return false
+	if first.size()!=second.size() and first.size()+second.size()!=3:return false
 	for part:String in first:
 		if part in second:return false
 	return true

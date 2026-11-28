@@ -33,7 +33,9 @@ func _run() -> void:
 		"mission score formula drifted",
 	)
 	_check(ServiceType.mission_number("s10") == 10, "valid stage parsing failed")
-	_check(ServiceType.mission_number("s11") == 0, "removed stage parsing was accepted")
+	_check(ServiceType.mission_number("s11") == 11, "new stage parsing failed")
+	_check(ServiceType.mission_number("s12") == 12, "new final stage parsing failed")
+	_check(ServiceType.mission_number("s13") == 0, "unknown stage parsing was accepted")
 	_check(
 		String(service.call("set_player_name", "  moon--ace!  ")) == "MOON-ACE",
 		"saved username was not normalized",

@@ -14,11 +14,13 @@ func configure(stage:StageDef,route:Array[Vector2i])->void:
 	var pixels:=dimensions+Vector2i(2,2)
 	mask=Image.create(pixels.x,pixels.y,false,Image.FORMAT_RGB8)
 	mask.fill(Color.BLACK)
+	var route_cells:Dictionary={}
+	for cell:Vector2i in route:route_cells[cell]=true
 	for y:int in dimensions.y:
 		for x:int in dimensions.x:
 			var cell:=Vector2i(x,y)
 			var present:=stage.tile_at(cell)!=StageDef.Tile.VOID
-			mask.set_pixel(x+1,y+1,Color(1.0 if present and route.has(cell) else 0.0,1.0 if present else 0.0,1.0 if present and stage.is_elevated_platform(cell) else 0.0))
+			mask.set_pixel(x+1,y+1,Color(1.0 if present and route_cells.has(cell) else 0.0,1.0 if present else 0.0,1.0 if present and stage.is_elevated_platform(cell) else 0.0))
 	var shader_material:=ShaderMaterial.new();shader_material.shader=SHADER
 	texture=ImageTexture.create_from_image(mask)
 	shader_material.set_shader_parameter("material_map",texture)

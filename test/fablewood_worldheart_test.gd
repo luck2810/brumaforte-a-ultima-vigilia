@@ -64,7 +64,7 @@ func run()->void:
 			check(m.can_merge(a,b)==not common)
 			if common:
 				var before:=m.state_hash();check(not m.apply_action([&"begin_merge",a.id,b.id]));check(m.state_hash()==before)
-	var mixed:=make();var mixed_dual:=dual(mixed,0,0);var basic:=add(mixed,&"guard_1",pads(mixed)[1]);check(not mixed.can_merge(mixed_dual,basic))
+	var mixed:=make();var mixed_dual:=dual(mixed,0,0);var basic:=add(mixed,&"guard_1",pads(mixed)[1]);check(mixed.can_merge(mixed_dual,basic))
 	# Suspended donors retain charges and delayed-pulse clocks even if API ticks continue.
 	var held:=make();var da:=dual(held,2,0);var db:=dual(held,3,1)
 	held.wave_active=true;held._spawn({"enemy_id":&"troll","path_idx":0});held.enemies[-1].hp=100000

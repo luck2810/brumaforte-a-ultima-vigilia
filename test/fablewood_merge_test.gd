@@ -74,6 +74,39 @@ func check_production_cancel() -> void:
 	flow.cancel()
 	check(not flow.active and battle.state_hash() == before)
 	host.free()
+func check_tri_fusions(ids:Array[StringName])->Array[String]:
+	var recipes:Dictionary={"fire_frost_storm":[0,1,2],"fire_frost_earth":[0,1,3],"fire_storm_earth":[0,2,3],"frost_storm_earth":[1,2,3]}
+	var keys:Array[String]=[]
+	for key:String in recipes:
+		var trio:Array=recipes[key]
+		var m:=make();var cells:=pads(m)
+		var first:=add(m,ids[int(trio[0])],cells[0])
+		var second:=add(m,ids[int(trio[1])],cells[1])
+		check(m.apply_action([&"begin_merge",first.id,second.id]))
+		check(m.apply_action([&"place_merge",cells[2]]))
+		var dual:=m.units[-1]
+		var final_single:=add(m,ids[int(trio[2])],cells[3])
+		check(m.can_merge(dual,final_single))
+		check(m.apply_action([&"begin_merge",dual.id,final_single.id]))
+		check(m.apply_action([&"place_merge",cells[2]]))
+		var triad:=m.units[-1]
+		check(m.merge_key(triad)==key and m.merged[triad.id].channels.size()==3)
+		check(not m.eligible_merge_donor(triad))
+		check(m.ultimates.info(triad.id).period==18*30)
+		m._spawn({"enemy_id":&"troll","path_idx":0})
+		var enemy:=m.enemies[-1];enemy.hp=100000;enemy.hp_max=100000
+		triad.cell=Pathing.cell_of(m.path_for(0),enemy.progress_units)+Vector2i(1,0)
+		var state:Dictionary=m.ultimates.states[triad.id]
+		state.remaining=1;m.tick=1
+		var health_before:=enemy.hp
+		check(m.ultimates._cast(m,triad,state))
+		check(enemy.hp<health_before)
+		var ultimate_events:Array[Dictionary]=[]
+		for event:Dictionary in m.drain_events():
+			if event.kind=="ultimate":ultimate_events.append(event)
+		check(ultimate_events.size()==1 and ultimate_events[0].key==key)
+		keys.append(key)
+	return keys
 func run()->void:
 	var ids:Array[StringName]=[&"caster_1",&"sniper_1",&"recruit",&"guard_1"]
 	var keys:Array[String]=[]
@@ -119,8 +152,10 @@ func run()->void:
 			var refund:=floori(float(u.dp_cost)*m.config.retreat_refund_percent/100.0)
 			check(m.apply_action([&"retreat",u.id]));check(m.dp==mini(m.config.dp_cap,gold+refund))
 	check(keys==["fire_frost","fire_storm","fire_earth","frost_storm","frost_earth","storm_earth"])
+	var triad_keys:=check_tri_fusions(ids)
+	check(triad_keys.size()==4)
 	var m:=make();var cells:=pads(m);var a:=add(m,ids[0],cells[0]);var b:=add(m,ids[0],cells[1])
 	check(not m.merge_available());check(not m.apply_action([&"begin_merge",a.id,b.id]))
 	check_production_cancel()
-	print("MERGE_MODEL_PASS checks=",checks," recipes=",keys)
+	print("MERGE_MODEL_PASS checks=",checks," recipes=",keys," triads=",triad_keys)
 	quit()

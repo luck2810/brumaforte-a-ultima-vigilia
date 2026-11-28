@@ -65,3 +65,17 @@ Este quadro acompanha resultados entregues com evidência; não trata funcionali
 - Não declarar teste que não foi executado.
 - Entregar código-fonte e arquivos organizados, assets utilizados e licenças, documentação, instruções de execução local e publicação web, lista de funcionalidades implementadas, pendentes e bugs conhecidos, e orientações para futuras melhorias com Claude.
 - O projeto deverá ser executável e não depender de arquivos não entregues. Se houver limitação técnica, explicá-la e apresentar alternativa funcional.
+
+## 12. Otimização, novas fusões, inimigos e campanha — em andamento
+
+### 12.1 Desempenho em celulares e computadores — em andamento
+- “otimize o jogo para celular e pc”: reduzir trabalho repetido de renderização/terreno sem remover recursos nem quebrar os controles por mouse e toque, pinça, redimensionamento e leitura em telas pequenas.
+
+### 12.2 Novas fusões — concluído; checks do modelo e das ultimates passaram
+- “adicione novas fusões”: acrescentar as quatro receitas tri-elementais que combinam três dos elementos existentes; as novas combinações precisam funcionar na seleção, posicionamento, combate, ultimate, representação visual e localização em português, inglês e chinês.
+
+### 12.3 Novos inimigos — concluído; dados integrados à campanha e checks passaram
+- “novos bixos”: acrescentar duas classes jogáveis de inimigo com atributos de combate próprios e identificação visual/textual localizada; preservar a compatibilidade dos inimigos atuais.
+
+### 12.4 Campanha ampliada — concluído; progressão e compatibilidade passaram nos checks
+- “almente a campanha”: acrescentar fases jogáveis s11 e s12 com progressão sequencial e desbloqueio normal; preservar s1–s10, os saves existentes e a projeção legada V2 de oito fases.

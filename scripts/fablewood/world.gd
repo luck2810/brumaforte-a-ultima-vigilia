@@ -704,6 +704,9 @@ func _draw_merged_tower(u:UnitState)->void:
 	var key:=model.merge_key(u);var center:=platform_surface_center(u.cell)
 	if reduced_motion:
 		draw_texture_rect(MergedArt.DATA[key].texture,tower_draw_rect(u,false),false)
+	elif not MergedAnim.DATA.has(key):
+		var height:=MergedArt.height_for(key)*float(TweakControls.value(&"player.visual_scale",1.0))
+		draw_texture_rect(MergedArt.DATA[key].texture,MergedArt.rect(key,center,height),false)
 	else:
 		var motion:Dictionary=merged_animation.states.get(u.id,{"idle":0.0,"cast":0.0,"weight":0.0})
 		var rect:=MergedAnim.rect(key,center,MergedArt.height_for(key)*float(TweakControls.value(&"player.visual_scale",1.0)))

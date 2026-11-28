@@ -27,8 +27,7 @@ func trigger(ev:Dictionary,w)->bool:
 	if not w.reduced_motion:
 		var parts:PackedStringArray=String(ev.key).split("_")
 		for point:Vector2 in points:
-			w.combat_particles.burst(point,parts[0],4,26.0)
-			w.combat_particles.burst(point,parts[1],4,26.0)
+			for part:String in parts:w.combat_particles.burst(point,part,3,26.0)
 	return true
 func advance(delta:float,w)->void:
 	if w.model==null:clear();return
@@ -65,6 +64,12 @@ func draw_ground(w)->void:
 		var center:Vector2=fx.center
 		if w.reduced_motion:
 			for at:Vector2 in fx.grounds:w._ellipse(at,Vector2(12,6),Color(P.GOLD,fade),2)
+			continue
+		var parts:PackedStringArray=String(fx.key).split("_")
+		if parts.size()==3:
+			for i:int in parts.size():
+				var color:Color=P.COLORS[parts[i]];color.a=fade
+				w._ellipse(center,Vector2(45.0+float(i)*14.0,22.0+float(i)*7.0)*(0.7+a*0.45),color,2.0)
 			continue
 		match fx.key:
 			"fire_frost":

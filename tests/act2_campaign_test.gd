@@ -19,16 +19,16 @@ func _init() -> void:
 
 func _test_catalog_and_balance() -> void:
 	var context := CampaignRuntimeContext.build()
-	_check(not context.is_empty(), "ten-stage campaign context failed to build")
+	_check(not context.is_empty(), "twelve-stage campaign context failed to build")
 	if context.is_empty():
 		return
 	var stage_order: Array = context["stage_order"]
-	_check(stage_order.size() == 10, "campaign stage order is not ten operations")
-	for index: int in 10:
+	_check(stage_order.size() == 12, "campaign stage order is not twelve operations")
+	for index: int in 12:
 		_check(stage_order[index] == "s%d" % (index + 1), "campaign stage order is noncanonical")
 	var reward_rows: Array = context["campaign"]["v3_stage_rewards"]
-	_check(reward_rows.size() == 10, "V3 reward projection is not one row per operation")
-	for index: int in range(8, 10):
+	_check(reward_rows.size() == 12, "V3 reward projection is not one row per operation")
+	for index: int in range(8, 12):
 		var rewards: Array = reward_rows[index]["rewards"]
 		_check(
 			rewards == [{"amount": 40, "id": "marks", "kind": "currency"}],
@@ -36,7 +36,7 @@ func _test_catalog_and_balance() -> void:
 		)
 
 	var prior_enemy_count := 17
-	for stage_index: int in range(9, 11):
+	for stage_index: int in range(9, 13):
 		var stage := load("res://data/stages/s%d.tres" % stage_index) as StageDef
 		_check(stage != null, "Act II stage s%d failed to load" % stage_index)
 		if stage == null:
@@ -100,6 +100,13 @@ func _test_progression_and_save_compatibility() -> void:
 		CampaignV3Attempts._validate_stage(data, context, "s9")["accepted"],
 		"S9 remained locked after an ordered S1–S8 clear prefix",
 	)
+	var progressed:Dictionary=data.duplicate(true)
+	for stage_index:int in range(9,11):
+		(progressed["stage_stars"] as Array).append({"stage_id":"s%d"%stage_index,"stars":1})
+	_check(CampaignV3Attempts._validate_stage(progressed,context,"s11")["accepted"],"S11 did not unlock after s10 was cleared")
+	_check(not CampaignV3Attempts._validate_stage(progressed,context,"s12")["accepted"],"S12 unlocked before s11 was cleared")
+	(progressed["stage_stars"] as Array).append({"stage_id":"s11","stars":1})
+	_check(CampaignV3Attempts._validate_stage(progressed,context,"s12")["accepted"],"S12 remained locked after s11 was cleared")
 
 	var previous_context: Dictionary = context.duplicate(true)
 	previous_context["stage_order"] = (previous_context["stage_order"] as Array).slice(0, 8)

@@ -3,7 +3,7 @@
   "engineVersion": "4.7.2.stable.official.ed1daf0bf",
   "inputs": {
     "objectFormat": "sha1",
-    "tree": "5ee78aaa679aa5b3ff704ebefef6233d43a6f75e",
+    "tree": "da57aecec1d4f4d8a7e3e9fd52423e22a26f0205",
     "entries": [
       {
         "path": ".gitignore",
@@ -39,7 +39,7 @@
         "path": "TODO.md",
         "type": "file",
         "mode": "100644",
-        "object": "4eea86848fe908eeea1549cb3fc40cb1ecbd6035"
+        "object": "5f5639450f42e726038168f9ebb03a540743128e"
       },
       {
         "path": "assets.lock.json",
@@ -7296,7 +7296,7 @@
         "path": "autoloads/leaderboard.gd",
         "type": "file",
         "mode": "100644",
-        "object": "23bffe97f9119b9e804ed890d01d328de9757ae4"
+        "object": "1ebae447c24dd4db394bce1d730e05c3441062d5"
       },
       {
         "path": "autoloads/leaderboard.gd.uid",
@@ -7410,7 +7410,7 @@
         "path": "data/campaign_def.gd",
         "type": "file",
         "mode": "100644",
-        "object": "ee12e35cde58b9a6fdb87908eca06a016bae7a8f"
+        "object": "c008e51a99451ef50b566c61010bad12c9df1be9"
       },
       {
         "path": "data/campaign_def.gd.uid",
@@ -7434,7 +7434,7 @@
         "path": "data/campaigns/p16_v3.tres",
         "type": "file",
         "mode": "100644",
-        "object": "ee1205def18f44133377c0aed8cf1836242dfe07"
+        "object": "2ab313f22df3c823fcab59bf6681f3db4c9c0602"
       },
       {
         "path": "data/class_def.gd",
@@ -7479,6 +7479,12 @@
         "object": "d49027395e5ff9a8cd1cc72a123294f00bd55919"
       },
       {
+        "path": "data/enemies/bog_wisp.tres",
+        "type": "file",
+        "mode": "100644",
+        "object": "996746e51b6e5c63e359de6d9368778ab1fff978"
+      },
+      {
         "path": "data/enemies/breacher.tres",
         "type": "file",
         "mode": "100644",
@@ -7507,6 +7513,12 @@
         "type": "file",
         "mode": "100644",
         "object": "7213545c7b5ed5f18e3c667b6b0eb7425c3c667c"
+      },
+      {
+        "path": "data/enemies/grave_knight.tres",
+        "type": "file",
+        "mode": "100644",
+        "object": "63772707a03b1f14400b91b0676f6faeb667ad25"
       },
       {
         "path": "data/enemies/grunt.tres",
@@ -8031,6 +8043,18 @@
         "object": "e70c97890e59b1f937226e49380f5f16334065cc"
       },
       {
+        "path": "data/stages/s11.tres",
+        "type": "file",
+        "mode": "100644",
+        "object": "00b8d6761b1b6919e2c71b9c80eef1a1e0e1ad22"
+      },
+      {
+        "path": "data/stages/s12.tres",
+        "type": "file",
+        "mode": "100644",
+        "object": "b97d57307c2ba6a13e01492ced76cc72b5f55b97"
+      },
+      {
         "path": "data/stages/s2.tres",
         "type": "file",
         "mode": "100644",
@@ -8256,19 +8280,19 @@
         "path": "localization/en-US.json",
         "type": "file",
         "mode": "100644",
-        "object": "6c56eab75189d875676cda6dc95fba0c8b9203dd"
+        "object": "269126391cabe80413cba08d964099028b66c15e"
       },
       {
         "path": "localization/pt-BR.json",
         "type": "file",
         "mode": "100644",
-        "object": "ae1757c0682f226b4334d0fecc65733f7cccb3d8"
+        "object": "2eebda651333436ee57ff2b2303a57f9201ae2f4"
       },
       {
         "path": "localization/zh-CN.json",
         "type": "file",
         "mode": "100644",
-        "object": "cd453e12d8efda4e5f563949f1df554dccb472da"
+        "object": "ed67b9ddaa18d9faedef5432b6b7ff2bc479255f"
       },
       {
         "path": "package.json",
@@ -8496,7 +8520,7 @@
         "path": "scripts/fablewood/merged_art.gd",
         "type": "file",
         "mode": "100644",
-        "object": "de48c071ef83aed733d7e55d7f54ec80d28f9f72"
+        "object": "65c50f04142d44294b7940991b030c1e3ead3cf9"
       },
       {
         "path": "scripts/fablewood/merged_art.gd.uid",
@@ -8556,7 +8580,7 @@
         "path": "scripts/fablewood/organic_terrain.gd",
         "type": "file",
         "mode": "100644",
-        "object": "9c1987d02086dc36e000bb63c6e714c4d93668f9"
+        "object": "1cc9475562bfe2b97b697ff45924e528be6d4be9"
       },
       {
         "path": "scripts/fablewood/organic_terrain.gd.uid",
@@ -8676,7 +8700,7 @@
         "path": "scripts/fablewood/ultimate_effects.gd",
         "type": "file",
         "mode": "100644",
-        "object": "fe0a8fb45874085567b576c999a5664d9011fbc1"
+        "object": "ea961a54630eb1cc92ee3793a6ea987dd05d39fe"
       },
       {
         "path": "scripts/fablewood/ultimate_effects.gd.uid",
@@ -8700,7 +8724,7 @@
         "path": "scripts/fablewood/world.gd",
         "type": "file",
         "mode": "100644",
-        "object": "d036bde798a6b9e88dad159dc173224f64e42818"
+        "object": "d02fa3e55ea8f7cc09de3266c92e4dd64f8e9747"
       },
       {
         "path": "scripts/fablewood/world.gd.uid",
@@ -10062,7 +10086,7 @@
         "path": "sim/fablewood_battle.gd",
         "type": "file",
         "mode": "100644",
-        "object": "7fda305e9ac80dfebc205d3e982e64e8a12200ce"
+        "object": "ae55bc69950208b253f082d8244e99b050932431"
       },
       {
         "path": "sim/fablewood_battle.gd.uid",
@@ -10086,7 +10110,7 @@
         "path": "sim/fablewood_ultimates.gd",
         "type": "file",
         "mode": "100644",
-        "object": "8c4985b0ae4501c6bfd9e97512bb0c1088e9051b"
+        "object": "37c0983fe905dd6f7fdd9ee0dc5dab1d5584afaf"
       },
       {
         "path": "sim/fablewood_ultimates.gd.uid",
@@ -10512,7 +10536,7 @@
         "path": "test/fablewood_chapter3_regression.gd",
         "type": "file",
         "mode": "100644",
-        "object": "73ed244f9d631a3fef0343217f11491bca8852fe"
+        "object": "02c35c4d3f4cb735ef5c82f6b058e572725c49d8"
       },
       {
         "path": "test/fablewood_chapter3_regression.gd.uid",
@@ -10896,7 +10920,7 @@
         "path": "test/fablewood_merge_test.gd",
         "type": "file",
         "mode": "100644",
-        "object": "2826802164d0443ef143df4bcb2c2fac36730e22"
+        "object": "25d1e795a0be8c468631438bda3c6cfa1f256a7f"
       },
       {
         "path": "test/fablewood_merge_test.gd.uid",
@@ -11400,7 +11424,7 @@
         "path": "test/fablewood_worldheart_test.gd",
         "type": "file",
         "mode": "100644",
-        "object": "0fd38fc32c7c9f379242733fbc477c7275180bf8"
+        "object": "c00d794e1b309cc2636a0fd4867180ddcaf69b6b"
       },
       {
         "path": "test/fablewood_worldheart_test.gd.uid",
@@ -11616,7 +11640,7 @@
         "path": "tests/act2_campaign_test.gd",
         "type": "file",
         "mode": "100644",
-        "object": "8bd28c025aa56236f25a4083ffa9a1cd4aee6267"
+        "object": "dcc489f2c893a86a16d06700e42165dac1db383d"
       },
       {
         "path": "tests/act2_campaign_test.gd.uid",
@@ -12012,7 +12036,7 @@
         "path": "tests/leaderboard_service_test.gd",
         "type": "file",
         "mode": "100644",
-        "object": "3a372c9f375498a0315fc066e1a5eb5bef6c45e3"
+        "object": "313be702d24e65241295af30a9a92cc5c4b45677"
       },
       {
         "path": "tests/leaderboard_service_test.gd.uid",
@@ -12491,7 +12515,7 @@
     ]
   },
   "build": {
-    "snapshotId": "sha256:dc1f798fc30b072a443e633721eb753051a46da6875a02cf291b5b5a720ecb5f",
+    "snapshotId": "sha256:80699675a9f2312fe32b1b7202640db9064b7842692a5a06ca92b315eb46e1eb",
     "toolchain": {
       "engineVersion": "4.7.2.stable.official.ed1daf0bf",
       "engineDigest": "sha256:3fcb80f4fe794e3859360eb641d8c41d8ffe2c2e54ba1981e55a76851d5ed1f4",
@@ -12504,21 +12528,21 @@
     "profile": "release",
     "export": {
       "profile": "release",
-      "snapshotId": "sha256:dc1f798fc30b072a443e633721eb753051a46da6875a02cf291b5b5a720ecb5f",
+      "snapshotId": "sha256:80699675a9f2312fe32b1b7202640db9064b7842692a5a06ca92b315eb46e1eb",
       "files": {
         "THIRD_PARTY_NOTICES.txt": "sha256:6466a5f78afd16f48f977adf1a117a7ab20f4a8ed062254a1de4a37c57fbd785",
         "index.apple-touch-icon.png": "sha256:4ac0a355e191c532204b2d55a42080aaf195f64319c76d24738a84212c7887c4",
         "index.audio.position.worklet.js": "sha256:be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
         "index.audio.worklet.js": "sha256:5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
-        "index.html": "sha256:c44d1a6df07b0fe77952f4ffb4d582a17ea94fb9042891059dd182fc3a51f6ee",
+        "index.html": "sha256:00ef7df897203f399796292427dce07985c8c87dd8bfce6846d09b122c34aa56",
         "index.icon.png": "sha256:ff71daeeeb3cead00c965c3fdde151faa8d89b25621e9835bb48763ae03b1c64",
         "index.js": "sha256:cb28c2d8ffd8981888823f1b6d98cdec4e3e11adf209ad556c22878e6d51c63a",
-        "index.pck": "sha256:3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee",
+        "index.pck": "sha256:49505350df597cd4ef126710c2602aa96032efbd08843121e112ab7e2d1c0264",
         "index.png": "sha256:1d2f28729db7746a7c0089c759ba6d4f6ca36a01d75d2f8d92a6f66146c7b665",
         "index.wasm": "sha256:fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
         "open-source-licenses.html": "sha256:a71733b15bf607b961f0bce6e5bf5eef3b9b7fc86dc22e3ae97327b8b082a939"
       },
-      "digest": "sha256:3842c4305634368477e0b2fb3a5db9ddb2cb4660afee696ed3fbaeabb3db2d33"
+      "digest": "sha256:3d82aeda41e9e042d3f34ee35770ba731bf1df317b734cb7f3674306315c317e"
     }
   },
   "artifacts": {
@@ -12527,8 +12551,8 @@
       "sha256": "sha256:fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
     },
     "pck": {
-      "path": "/manus-storage/game/sha256/3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee.pck",
-      "sha256": "sha256:3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee"
+      "path": "/manus-storage/game/sha256/49505350df597cd4ef126710c2602aa96032efbd08843121e112ab7e2d1c0264.pck",
+      "sha256": "sha256:49505350df597cd4ef126710c2602aa96032efbd08843121e112ab7e2d1c0264"
     }
   },
   "files": {
@@ -12537,7 +12561,7 @@
     "index.apple-touch-icon.png": "sha256:4ac0a355e191c532204b2d55a42080aaf195f64319c76d24738a84212c7887c4",
     "index.audio.position.worklet.js": "sha256:be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
     "index.audio.worklet.js": "sha256:5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
-    "index.html": "sha256:2c6a2e30d6a6510428e6b0bf2bb7ebc1dcfcb5121798e35fcd27f01f694d50fa",
+    "index.html": "sha256:ff605ddb8ad1477363e0b429e51f5a5ccb6387a2462cf59fad0fac99654df375",
     "index.icon.png": "sha256:ff71daeeeb3cead00c965c3fdde151faa8d89b25621e9835bb48763ae03b1c64",
     "index.js": "sha256:cb28c2d8ffd8981888823f1b6d98cdec4e3e11adf209ad556c22878e6d51c63a",
     "index.png": "sha256:1d2f28729db7746a7c0089c759ba6d4f6ca36a01d75d2f8d92a6f66146c7b665",

@@ -1,6 +1,6 @@
 extends RefCounted
 ## Model-only automatic abilities. No Node, wall clock, visual RNG or audio.
-const PERIODS := {"fire_frost":12*30,"fire_storm":14*30,"fire_earth":16*30,"frost_storm":12*30,"frost_earth":18*30,"storm_earth":15*30,"fire_frost_storm_earth":20*30}
+const PERIODS := {"fire_frost":12*30,"fire_storm":14*30,"fire_earth":16*30,"frost_storm":12*30,"frost_earth":18*30,"storm_earth":15*30,"fire_frost_storm":18*30,"fire_frost_earth":18*30,"fire_storm_earth":18*30,"frost_storm_earth":18*30,"fire_frost_storm_earth":20*30}
 const METEOR_KEY:="fire_frost_storm_earth"
 const METEOR_FLIGHT_TICKS:=30
 var states:Dictionary={}
@@ -85,6 +85,14 @@ func _cast(m,u:UnitState,state:Dictionary)->bool:
 		state.active={"center":center,"launch_tick":m.tick,"impact_tick":m.tick+METEOR_FLIGHT_TICKS,"channels":m.merged[u.id].channels.duplicate(true)}
 		u.last_attack_tick=m.tick;u.last_attack_cell=center
 		m.events.append({"kind":"meteor_launch","key":key,"unit":u.id,"cell":u.cell,"center":center,"tick":m.tick,"impact_tick":m.tick+METEOR_FLIGHT_TICKS,"radius":3,"hits":[]})
+		return true
+	if m.merged[u.id].channels.size()==3:
+		targets=_area(m,targets,center,2,6)
+		for e:EnemyState in targets:
+			for channel:Dictionary in m.merged[u.id].channels:
+				var element_name:=String(channel.element)
+				_hit(m,e,int(channel.damage),element_name=="earth",30 if element_name=="frost" else 0,45 if element_name=="storm" else 0,60 if element_name=="fire" else 0,element_name)
+		_event(m,u,state,targets,center)
 		return true
 	match key:
 		"fire_frost":

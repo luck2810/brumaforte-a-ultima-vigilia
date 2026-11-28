@@ -44,6 +44,11 @@ func improve(m:FablewoodBattle)->void:
 				if not m.eligible_merge_donor(a):continue
 				for b:UnitState in m.units:
 					if not m.can_merge(a,b):continue
+					# Keep this historical clear fixture focused on the four-channel
+					# Worldheart; tri-elemental recipes have dedicated tests.
+					var a_channels:int=m.merged[a.id].channels.size() if m.is_merged(a) else 1
+					var b_channels:int=m.merged[b.id].channels.size() if m.is_merged(b) else 1
+					if a_channels!=b_channels:continue
 					if m.apply_action([&"begin_merge",a.id,b.id]):
 						for p:Vector2i in slots:
 							if m.can_place_merge(p):m.apply_action([&"place_merge",p]);break

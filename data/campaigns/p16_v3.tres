@@ -13,7 +13,7 @@ paid_offers = Array[Dictionary]([{
 "offer_id": "p16_caster_contract",
 "operator_def_id": "recruit"
 }])
-environment_sha256 = "6c1f3ca14d704aef88e9e755f4c8346d39fceb8a84ef127d71724ac24b41c6fa"
+environment_sha256 = "2da1241433cd89cc67022b6557f8e9335bbd2d44b49a06b990236fcfea5c2530"
 starter_rows = Array[Dictionary]([{
 "class_id": "recruit",
 "operator_def_id": "recruit",
@@ -67,6 +67,12 @@ v3_stage_rewards = Array[Dictionary]([{
 }, {
 "rewards": [{"amount": 40, "id": "marks", "kind": "currency"}],
 "stage_id": "s10"
+}, {
+"rewards": [{"amount": 40, "id": "marks", "kind": "currency"}],
+"stage_id": "s11"
+}, {
+"rewards": [{"amount": 40, "id": "marks", "kind": "currency"}],
+"stage_id": "s12"
 }])
 portrait_asset_ids = Array[StringName]([&"portrait_recruit_00", &"portrait_recruit_01", &"portrait_recruit_02", &"portrait_recruit_03", &"portrait_recruit_04", &"portrait_recruit_05", &"portrait_recruit_06", &"portrait_recruit_07"])
 basic_recruit_cost = 5
