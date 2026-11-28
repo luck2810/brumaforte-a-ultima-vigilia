@@ -17,8 +17,12 @@ var _sealed_result_metadata:Dictionary={}
 const ELEMENTS := {&"caster_1":"fire", &"sniper_1":"frost", &"recruit":"storm", &"guard_1":"earth"}
 const BASE_ATTACK_MULTIPLIER := 0.25
 const ENEMY_BASE_HP_MULTIPLIER := 1.5
-const REWARDS := {&"goblin":9, &"orc":18, &"troll":32, &"dragon":38, &"prismback":48, &"harrier":24, &"broodmother":38}
+const REWARDS := {&"goblin":9, &"orc":18, &"troll":32, &"dragon":38, &"prismback":48, &"harrier":24, &"broodmother":38, &"skeleton":13, &"wisp":20}
 var chapter := 1
+var base_hp_max := 20
+const MAX_BASE_HP := 100
+const FORTIFY_COST := 100
+const FORTIFY_AMOUNT := 10
 var wave := 0
 var wave_active := false
 var tiers: Dictionary = {}
@@ -46,7 +50,7 @@ static func create_fablewood(stage_def: StageDef, launch: Dictionary, seed_value
 	m.chapter = int(String(stage_def.id).trim_prefix("s"))
 	for id: StringName in [&"caster_1", &"sniper_1", &"recruit", &"guard_1"]:
 		m._op_defs[id] = load("res://data/operators/%s.tres" % id)
-	for id: StringName in [&"goblin", &"orc", &"troll", &"dragon", &"prismback", &"harrier", &"broodmother"]:
+	for id: StringName in [&"goblin", &"orc", &"troll", &"dragon", &"prismback", &"harrier", &"broodmother", &"skeleton", &"wisp"]:
 		m._defs[id] = load("res://data/enemies/%s.tres" % id)
 	if not BattleTicketRuntimeScript.configure(m, launch.input, stage_def, seed_value, launch.trusted_ticket_hashes):
 		return null
@@ -59,6 +63,7 @@ static func create_fablewood(stage_def: StageDef, launch: Dictionary, seed_value
 	m.config.dp_regen_interval_ticks = 100000000
 	m.config.damage_stagger_ticks = 0
 	m.base_hp = m.config.base_hp_start
+	m.base_hp_max = m.config.base_hp_start
 	m.dp = m.config.dp_start
 	m.timeline = WaveTimeline.new()
 	for i: int in stage_def.paths.size():
@@ -79,6 +84,8 @@ func apply_action(action: Array) -> bool:
 		return action.size() == 2 and upgrade(int(action[1]))
 	if action[0] == &"next_wave":
 		return action.size() == 1 and next_wave()
+	if action[0] == &"fortify_base":
+		return action.size() == 1 and fortify_base()
 	var accepted := super.apply_action(action)
 	if accepted and action[0] == &"deploy":
 		var u: UnitState = units[-1]
@@ -133,6 +140,16 @@ func upgrade(unit_id: int) -> bool:
 	events.append({"kind":"upgrade", "cell":u.cell, "element":element(u)})
 	return true
 
+func can_fortify_base() -> bool:
+	return result == Result.RUNNING and not wave_active and pending_merge.is_empty() and base_hp_max <= MAX_BASE_HP - FORTIFY_AMOUNT and dp >= FORTIFY_COST
+func fortify_base() -> bool:
+	if not can_fortify_base():return false
+	dp-=FORTIFY_COST
+	dp_spent+=FORTIFY_COST
+	base_hp_max+=FORTIFY_AMOUNT
+	base_hp=mini(base_hp_max, base_hp + FORTIFY_AMOUNT)
+	events.append({"kind":"fortify","amount":FORTIFY_AMOUNT,"cost":FORTIFY_COST,"base_hp_max":base_hp_max})
+	return true
 func configure_hard_mode(enabled:bool)->bool:
 	if _run_started or result!=Result.RUNNING or tick!=0 or wave!=0 or not enemies.is_empty():return false
 	hard_mode=enabled;return true
@@ -189,6 +206,14 @@ func get_wave_schedule(wave_number:int)->Array[Dictionary]:
 		var row:Dictionary={"tick":int(entry.tick)%30000,"enemy_id":entry.enemy_id,"path_idx":entry.path_idx,"order":schedule.size()}
 		schedule.append(row)
 		if entry.enemy_id in LateEnemyModel.IDS:late.append(row)
+	# The new archetypes are campaign additions, keeping the original eight-stage
+	# legacy content projection immutable for existing save validation.
+	var newcomers:Array[Dictionary]=[]
+	if chapter==2 and wave_number in [4,7]:
+		newcomers=[{"tick":420 if wave_number==4 else 900,"enemy_id":&"skeleton" if wave_number==4 else &"wisp","path_idx":0}]
+	for newcomer:Dictionary in newcomers:
+		newcomer["order"]=schedule.size()
+		schedule.append(newcomer)
 	if hard_mode and not late.is_empty():
 		var first:=2147483647
 		for row:Dictionary in late:first=mini(first,int(row.tick))
@@ -413,7 +438,7 @@ func _check_terminal() -> void:
 		ultimates.stop_effects()
 		completed_waves += 1
 		_grant_dp(35 + chapter * 5)
-		base_hp = mini(20, base_hp + 1)
+		base_hp = mini(base_hp_max, base_hp + 1)
 		events.append({"kind":"cleared", "wave":wave})
 		if wave == 8:
 			if not pending_merge.is_empty():cancel_merge()
@@ -422,7 +447,7 @@ func _check_terminal() -> void:
 			terminal_reason = &"clear"
 
 func state_hash() -> int:
-	var extra := str([BASE_ATTACK_MULTIPLIER, ENEMY_BASE_HP_MULTIPLIER, wave, wave_active, tiers, slow_until, burn_until, total_upgrades, earned, difficulty, damage_scale, attack_scale, gold_scale, enemy_speed, tower_range,merged,pending_merge,total_merges,ultimates.states,ultimates.last_tick,late_enemies.states,late_enemies.children,late_enemies.last_tick,hard_mode,weaknesses.signature()])
+	var extra := str([BASE_ATTACK_MULTIPLIER, ENEMY_BASE_HP_MULTIPLIER, wave, wave_active, tiers, slow_until, burn_until, total_upgrades, earned, difficulty, damage_scale, attack_scale, gold_scale, enemy_speed, tower_range,merged,pending_merge,total_merges,ultimates.states,ultimates.last_tick,late_enemies.states,late_enemies.children,late_enemies.last_tick,hard_mode,weaknesses.signature(),base_hp_max])
 	return super.state_hash() ^ extra.hash()
 
 func drain_events() -> Array[Dictionary]:

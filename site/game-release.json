@@ -3,7 +3,7 @@
   "engineVersion": "4.7.2.stable.official.ed1daf0bf",
   "inputs": {
     "objectFormat": "sha1",
-    "tree": "ccec21511cbe73dc7f055b55297067fce177c8c6",
+    "tree": "5ee78aaa679aa5b3ff704ebefef6233d43a6f75e",
     "entries": [
       {
         "path": ".gitignore",
@@ -45,7 +45,51 @@
         "path": "assets.lock.json",
         "type": "file",
         "mode": "100644",
-        "object": "f24b381781b798558820c5a58ddcc38373dbbd45"
+        "object": "47b5262baa465cfadfee17a370e9a1c0d2d95527"
+      },
+      {
+        "path": "assets/brumaforte/enemies/skeleton.png",
+        "type": "managed",
+        "sha256": "sha256:a418df7c2aaeab4c4f4c0b123a970854e970a5d773bed84a31a887a9c21c69ff"
+      },
+      {
+        "path": "assets/brumaforte/enemies/skeleton.png.import",
+        "type": "file",
+        "mode": "100644",
+        "object": "d310f7cb2f7277c332295f9e5d437b6b868201ad"
+      },
+      {
+        "path": "assets/brumaforte/enemies/skeleton_runtime.png",
+        "type": "managed",
+        "sha256": "sha256:ee16c64478a2448991c1c6b2df0ea3bd3d4ca33f6291817d83148f34ec5f2f25"
+      },
+      {
+        "path": "assets/brumaforte/enemies/skeleton_runtime.png.import",
+        "type": "file",
+        "mode": "100644",
+        "object": "578262f79a2c6e58fc68881011a961ef9ccc63b7"
+      },
+      {
+        "path": "assets/brumaforte/enemies/wisp.png",
+        "type": "managed",
+        "sha256": "sha256:305e7881c83719f8dfea0cf1a581067a48c98b5dbc93ba6a154e4b5750fb8412"
+      },
+      {
+        "path": "assets/brumaforte/enemies/wisp.png.import",
+        "type": "file",
+        "mode": "100644",
+        "object": "2e70a668d53d008ef666c746e5348563737dd272"
+      },
+      {
+        "path": "assets/brumaforte/enemies/wisp_runtime.png",
+        "type": "managed",
+        "sha256": "sha256:c4cedb943c461ef83607886002f2597cb93cf72bf3558687abd9c626a28085ab"
+      },
+      {
+        "path": "assets/brumaforte/enemies/wisp_runtime.png.import",
+        "type": "file",
+        "mode": "100644",
+        "object": "193063acf56c6c1bcb5bfacc6097e4656c564a78"
       },
       {
         "path": "assets/brumaforte/towers/arqueiros.png",
@@ -7366,7 +7410,7 @@
         "path": "data/campaign_def.gd",
         "type": "file",
         "mode": "100644",
-        "object": "6dad90c048b9178cbfb572c65276c2ae312d0e66"
+        "object": "ee12e35cde58b9a6fdb87908eca06a016bae7a8f"
       },
       {
         "path": "data/campaign_def.gd.uid",
@@ -7390,7 +7434,7 @@
         "path": "data/campaigns/p16_v3.tres",
         "type": "file",
         "mode": "100644",
-        "object": "ba19903f72a9218790bd16b2357220906048b894"
+        "object": "ee1205def18f44133377c0aed8cf1836242dfe07"
       },
       {
         "path": "data/class_def.gd",
@@ -7519,6 +7563,12 @@
         "object": "bfd2c8e1e467c43ff8401f3fdd6c3f3f26c993e0"
       },
       {
+        "path": "data/enemies/skeleton.tres",
+        "type": "file",
+        "mode": "100644",
+        "object": "0f83098e8b867d9cd8bca936dd8396dbd2eeab44"
+      },
+      {
         "path": "data/enemies/spellcaster.tres",
         "type": "file",
         "mode": "100644",
@@ -7529,6 +7579,12 @@
         "type": "file",
         "mode": "100644",
         "object": "73c233912a7f3a37ebcfa1c3eed7f1acd498a338"
+      },
+      {
+        "path": "data/enemies/wisp.tres",
+        "type": "file",
+        "mode": "100644",
+        "object": "fe289ead0a7e49ec4382311b56d72e7eadf821c7"
       },
       {
         "path": "data/enemy_def.gd",
@@ -8020,7 +8076,7 @@
         "path": "data/stages/s9.tres",
         "type": "file",
         "mode": "100644",
-        "object": "547f8ac230731551bd6e1042220a324c740a4594"
+        "object": "0d8eb27185958a48d926db60f24bf8cbc72335f1"
       },
       {
         "path": "data/target_policies/enemy_blocker_only.tres",
@@ -8344,7 +8400,7 @@
         "path": "scripts/fablewood/enemy_animation.gd",
         "type": "file",
         "mode": "100644",
-        "object": "ee7104cc6c31209cd5429e0de88fc804165d0842"
+        "object": "a3c9c590c8498ee9f05eb36cb6c4f4b4edf6218b"
       },
       {
         "path": "scripts/fablewood/enemy_animation.gd.uid",
@@ -8536,7 +8592,7 @@
         "path": "scripts/fablewood/screen.gd",
         "type": "file",
         "mode": "100644",
-        "object": "0545a6d05d3043ded2a04ffb4490e8c5160f0bdb"
+        "object": "b847386575b55babfab30d5ed847c9880f50f8dc"
       },
       {
         "path": "scripts/fablewood/screen.gd.uid",
@@ -8644,7 +8700,7 @@
         "path": "scripts/fablewood/world.gd",
         "type": "file",
         "mode": "100644",
-        "object": "2da64c29a6d52a418a364bd133d6a3e4898af7c7"
+        "object": "d036bde798a6b9e88dad159dc173224f64e42818"
       },
       {
         "path": "scripts/fablewood/world.gd.uid",
@@ -9442,7 +9498,7 @@
         "path": "sim/battle_snapshot.gd",
         "type": "file",
         "mode": "100644",
-        "object": "0dc5c43df91843bb482f157ca50b70b1980aba21"
+        "object": "e3852a018a85a326080b40670a2b34d5b98a4f81"
       },
       {
         "path": "sim/battle_snapshot.gd.uid",
@@ -10006,7 +10062,7 @@
         "path": "sim/fablewood_battle.gd",
         "type": "file",
         "mode": "100644",
-        "object": "3c6f92a2503cd75bdd28e30c37fdb7ad5d21d2cc"
+        "object": "7fda305e9ac80dfebc205d3e982e64e8a12200ce"
       },
       {
         "path": "sim/fablewood_battle.gd.uid",
@@ -10468,7 +10524,7 @@
         "path": "test/fablewood_checks.gd",
         "type": "file",
         "mode": "100644",
-        "object": "be96fbbfa01a5637398b631d15950ff0968ad286"
+        "object": "1df70e214844e2d853edc0bee1a66c558ef63791"
       },
       {
         "path": "test/fablewood_checks.gd.uid",
@@ -12435,7 +12491,7 @@
     ]
   },
   "build": {
-    "snapshotId": "sha256:c24ad7c7924209025a93f19779525b16ceaebb8f96454b0df4f765fbf40e2c72",
+    "snapshotId": "sha256:dc1f798fc30b072a443e633721eb753051a46da6875a02cf291b5b5a720ecb5f",
     "toolchain": {
       "engineVersion": "4.7.2.stable.official.ed1daf0bf",
       "engineDigest": "sha256:3fcb80f4fe794e3859360eb641d8c41d8ffe2c2e54ba1981e55a76851d5ed1f4",
@@ -12448,21 +12504,21 @@
     "profile": "release",
     "export": {
       "profile": "release",
-      "snapshotId": "sha256:c24ad7c7924209025a93f19779525b16ceaebb8f96454b0df4f765fbf40e2c72",
+      "snapshotId": "sha256:dc1f798fc30b072a443e633721eb753051a46da6875a02cf291b5b5a720ecb5f",
       "files": {
         "THIRD_PARTY_NOTICES.txt": "sha256:6466a5f78afd16f48f977adf1a117a7ab20f4a8ed062254a1de4a37c57fbd785",
         "index.apple-touch-icon.png": "sha256:4ac0a355e191c532204b2d55a42080aaf195f64319c76d24738a84212c7887c4",
         "index.audio.position.worklet.js": "sha256:be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
         "index.audio.worklet.js": "sha256:5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
-        "index.html": "sha256:2555bfdfe54e0acbba3686a1dfcebdf8b66a9cea6461d15bdce5132deda20f83",
+        "index.html": "sha256:c44d1a6df07b0fe77952f4ffb4d582a17ea94fb9042891059dd182fc3a51f6ee",
         "index.icon.png": "sha256:ff71daeeeb3cead00c965c3fdde151faa8d89b25621e9835bb48763ae03b1c64",
         "index.js": "sha256:cb28c2d8ffd8981888823f1b6d98cdec4e3e11adf209ad556c22878e6d51c63a",
-        "index.pck": "sha256:a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546",
+        "index.pck": "sha256:3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee",
         "index.png": "sha256:1d2f28729db7746a7c0089c759ba6d4f6ca36a01d75d2f8d92a6f66146c7b665",
         "index.wasm": "sha256:fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
         "open-source-licenses.html": "sha256:a71733b15bf607b961f0bce6e5bf5eef3b9b7fc86dc22e3ae97327b8b082a939"
       },
-      "digest": "sha256:049857f9e928d69603cabe2e28a9c6b3ed2959d844ad29dfab97c6e38e5db72c"
+      "digest": "sha256:3842c4305634368477e0b2fb3a5db9ddb2cb4660afee696ed3fbaeabb3db2d33"
     }
   },
   "artifacts": {
@@ -12471,8 +12527,8 @@
       "sha256": "sha256:fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
     },
     "pck": {
-      "path": "/manus-storage/game/sha256/a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546.pck",
-      "sha256": "sha256:a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546"
+      "path": "/manus-storage/game/sha256/3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee.pck",
+      "sha256": "sha256:3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee"
     }
   },
   "files": {
@@ -12481,7 +12537,7 @@
     "index.apple-touch-icon.png": "sha256:4ac0a355e191c532204b2d55a42080aaf195f64319c76d24738a84212c7887c4",
     "index.audio.position.worklet.js": "sha256:be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
     "index.audio.worklet.js": "sha256:5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
-    "index.html": "sha256:84c052d7b797cfd83df3ad8c9389762e11b41a70e55e8b9f0c3f9c2f5a275331",
+    "index.html": "sha256:2c6a2e30d6a6510428e6b0bf2bb7ebc1dcfcb5121798e35fcd27f01f694d50fa",
     "index.icon.png": "sha256:ff71daeeeb3cead00c965c3fdde151faa8d89b25621e9835bb48763ae03b1c64",
     "index.js": "sha256:cb28c2d8ffd8981888823f1b6d98cdec4e3e11adf209ad556c22878e6d51c63a",
     "index.png": "sha256:1d2f28729db7746a7c0089c759ba6d4f6ca36a01d75d2f8d92a6f66146c7b665",

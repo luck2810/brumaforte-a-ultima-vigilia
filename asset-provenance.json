@@ -1,5 +1,85 @@
 {
   "assets": {
+    "assets/brumaforte/enemies/skeleton.png": {
+      "declaredUseEvidence": [],
+      "generator": {},
+      "inputs": [],
+      "license": {},
+      "origin": "unknown",
+      "referenceEvidence": [],
+      "regions": [],
+      "sha256": "sha256:a418df7c2aaeab4c4f4c0b123a970854e970a5d773bed84a31a887a9c21c69ff",
+      "shipped": true,
+      "size": 2948161,
+      "source": {},
+      "status": "present",
+      "transformations": [],
+      "useEvidence": [],
+      "used": false,
+      "usedBy": []
+    },
+    "assets/brumaforte/enemies/skeleton_runtime.png": {
+      "declaredUseEvidence": [],
+      "generator": {},
+      "inputs": [],
+      "license": {},
+      "origin": "unknown",
+      "referenceEvidence": [
+        "scripts/fablewood/enemy_animation.gd"
+      ],
+      "regions": [],
+      "sha256": "sha256:ee16c64478a2448991c1c6b2df0ea3bd3d4ca33f6291817d83148f34ec5f2f25",
+      "shipped": true,
+      "size": 140201,
+      "source": {},
+      "status": "present",
+      "transformations": [],
+      "useEvidence": [
+        "scripts/fablewood/enemy_animation.gd"
+      ],
+      "used": true,
+      "usedBy": []
+    },
+    "assets/brumaforte/enemies/wisp.png": {
+      "declaredUseEvidence": [],
+      "generator": {},
+      "inputs": [],
+      "license": {},
+      "origin": "unknown",
+      "referenceEvidence": [],
+      "regions": [],
+      "sha256": "sha256:305e7881c83719f8dfea0cf1a581067a48c98b5dbc93ba6a154e4b5750fb8412",
+      "shipped": true,
+      "size": 3187438,
+      "source": {},
+      "status": "present",
+      "transformations": [],
+      "useEvidence": [],
+      "used": false,
+      "usedBy": []
+    },
+    "assets/brumaforte/enemies/wisp_runtime.png": {
+      "declaredUseEvidence": [],
+      "generator": {},
+      "inputs": [],
+      "license": {},
+      "origin": "unknown",
+      "referenceEvidence": [
+        "scripts/fablewood/enemy_animation.gd"
+      ],
+      "regions": [],
+      "sha256": "sha256:c4cedb943c461ef83607886002f2597cb93cf72bf3558687abd9c626a28085ab",
+      "shipped": true,
+      "size": 145253,
+      "source": {},
+      "status": "present",
+      "transformations": [],
+      "useEvidence": [
+        "scripts/fablewood/enemy_animation.gd"
+      ],
+      "used": true,
+      "usedBy": []
+    },
     "assets/brumaforte/towers/arqueiros.png": {
       "declaredUseEvidence": [],
       "generator": {},
@@ -35708,9 +35788,9 @@
         ]
       }
     ],
-    "pckSha256": "sha256:a20bec3a5608ff299c12f6ca11106289d5973f06756d049590598bf1399b9546",
+    "pckSha256": "sha256:3eefdbcf1a26e8e47576a03646b8a64723352940e60f9f5b343cf2249e0713ee",
     "profile": "release",
-    "sourceFingerprint": "sha256:bdc1e1c076a2f345ea172c306e976cd992394c0619e25446acea56eef32b98d4"
+    "sourceFingerprint": "sha256:c29bfca6190db01cd976428ed926710b1e457179215843e183b26f2d1a69c6da"
   },
   "procedures": {},
   "summary": {
@@ -35743,9 +35823,9 @@
     },
     "files": {
       "downloaded": 213,
-      "retained": 611,
-      "shipped": 178,
-      "used": 231
+      "retained": 615,
+      "shipped": 182,
+      "used": 233
     },
     "origins": {
       "ai": {
@@ -35779,9 +35859,9 @@
         "used": 0
       },
       "unknown": {
-        "retained": 113,
-        "shipped": 7,
-        "used": 51
+        "retained": 117,
+        "shipped": 11,
+        "used": 53
       }
     },
     "packs": {

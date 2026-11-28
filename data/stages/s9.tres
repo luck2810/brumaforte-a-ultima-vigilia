@@ -82,6 +82,22 @@ waves = Array[Dictionary]([{
 "enemy_id": &"grunt",
 "path_idx": 1,
 "tick": 1120
+}, {
+"enemy_id": &"skeleton",
+"path_idx": 1,
+"tick": 210
+}, {
+"enemy_id": &"wisp",
+"path_idx": 0,
+"tick": 450
+}, {
+"enemy_id": &"skeleton",
+"path_idx": 0,
+"tick": 760
+}, {
+"enemy_id": &"wisp",
+"path_idx": 1,
+"tick": 1170
 }])
 wave_starts = PackedInt32Array(0, 420, 840)
 high_threat_wave_indices = PackedInt32Array(1, 2)

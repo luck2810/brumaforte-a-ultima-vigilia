@@ -7,7 +7,7 @@ extends Resource
 const P16_ENVIRONMENT_SHA256 := \
 	"3f90e0a63147c5ca092dad8e83feffffe2204bd57dbe601d768b4a6d6f0d9eff"
 const P16_V3_ENVIRONMENT_SHA256 := \
-	"fefba29d511f388a548692bbd761f748413f620c465780f9fd116fb2d0f7642e"
+	"6c1f3ca14d704aef88e9e755f4c8346d39fceb8a84ef127d71724ac24b41c6fa"
 
 @export var schema_version: int = 2
 @export var name_version: int = 1

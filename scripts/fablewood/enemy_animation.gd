@@ -9,6 +9,7 @@ const COLUMNS:=8
 const FRAME_COUNT:=48
 const FPS:=24.0
 const DURATION:=2.0
+const EXTRA_TEXTURES:={&"skeleton":preload("res://assets/brumaforte/enemies/skeleton_runtime.png"),&"wisp":preload("res://assets/brumaforte/enemies/wisp_runtime.png")}
 const DISPLAY_EXPANSION:=1.5
 const CYCLES_PER_TILE:={&"goblin":2.8800000000,&"orc":1.9200000000,&"troll":1.9764705882,&"dragon":0.65}
 const SHEETS:={
@@ -39,6 +40,7 @@ const DIRECTIONAL:={
 	}
 }
 static var _frames:Dictionary={}
+static func texture_for(kind:StringName)->Texture2D:return EXTRA_TEXTURES.get(kind)
 static func has_directions(kind:StringName)->bool:
 	return DIRECTIONAL.has(kind)
 static func frame_index(seconds:float)->int:

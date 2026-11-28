@@ -16,6 +16,38 @@
   },
   "bundles": {},
   "assets": {
+    "assets/brumaforte/enemies/skeleton.png": {
+      "path": "/manus-storage/game/sha256/a418df7c2aaeab4c4f4c0b123a970854e970a5d773bed84a31a887a9c21c69ff.png",
+      "sha256": "sha256:a418df7c2aaeab4c4f4c0b123a970854e970a5d773bed84a31a887a9c21c69ff",
+      "size": 2948161,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": false
+    },
+    "assets/brumaforte/enemies/skeleton_runtime.png": {
+      "path": "/manus-storage/game/sha256/ee16c64478a2448991c1c6b2df0ea3bd3d4ca33f6291817d83148f34ec5f2f25.png",
+      "sha256": "sha256:ee16c64478a2448991c1c6b2df0ea3bd3d4ca33f6291817d83148f34ec5f2f25",
+      "size": 140201,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": true
+    },
+    "assets/brumaforte/enemies/wisp.png": {
+      "path": "/manus-storage/game/sha256/305e7881c83719f8dfea0cf1a581067a48c98b5dbc93ba6a154e4b5750fb8412.png",
+      "sha256": "sha256:305e7881c83719f8dfea0cf1a581067a48c98b5dbc93ba6a154e4b5750fb8412",
+      "size": 3187438,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": false
+    },
+    "assets/brumaforte/enemies/wisp_runtime.png": {
+      "path": "/manus-storage/game/sha256/c4cedb943c461ef83607886002f2597cb93cf72bf3558687abd9c626a28085ab.png",
+      "sha256": "sha256:c4cedb943c461ef83607886002f2597cb93cf72bf3558687abd9c626a28085ab",
+      "size": 145253,
+      "assetType": "image",
+      "groupId": "brumaforte",
+      "used": true
+    },
     "assets/brumaforte/towers/arqueiros.png": {
       "path": "/manus-storage/game/sha256/031797bdb49aa240765504403a8faa5ea253df950151847e2c3934dd08936389.png",
       "sha256": "sha256:031797bdb49aa240765504403a8faa5ea253df950151847e2c3934dd08936389",
